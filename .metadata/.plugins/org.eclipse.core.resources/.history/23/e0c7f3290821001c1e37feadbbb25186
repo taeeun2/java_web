@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS - 정규표현식</title>
+    </head>
+    <body>
+        <p id="test"></p>
+        <script type = "text/javascript" src = "member.js"></script>
+        <script>
+            var test = document.getElementById('test');
+
+            try{
+            	alert_button('안녕하세여');
+            }
+            catch(err){
+                test.innerHTML = err.message;
+            }
+        </script>
+        <input type = "button" onclick="alert_button('버튼클릭')">
+    </body>
+</html>

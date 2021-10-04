@@ -1,0 +1,39 @@
+package Listener;
+
+import java.io.FileReader;
+import java.util.Hashtable;
+import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+public class ApplicationContext {
+
+	Hashtable<String, Object> objTable = new Hashtable<String, Object>();
+
+	public ApplicationContext(String propertiesPath) throws Exception{
+		Properties props = new Properties();
+		props.load(new FileReader(propertiesPath));
+		preparedObjects(props);
+	}
+	
+	public Object getBean(String key) {
+		return objTable.get(key);
+	}
+	
+	public void preparedObjects(Properties props) throws Exception{
+		System.out.println("intialContext");
+		Context ctx = new InitialContext();//바인딩된 객체를 찾기 위해 필요한 객체
+		for(Object item : props.keySet()) {
+			String key = (String) item;
+			String value = props.getProperty(key);
+			if(key.startsWith("jndi.")) {//jndi로 시작하면 데이터 소스로 쓴다.
+				System.out.println("데이터 소스 읽어옴" + key+value);
+				objTable.put(key, ctx.lookup(value));
+			}else {
+				objTable.put(key, Class.forName(value).newInstance());//클래스 정보로 객체를 생성한다.
+			}
+		}
+	}
+	
+}

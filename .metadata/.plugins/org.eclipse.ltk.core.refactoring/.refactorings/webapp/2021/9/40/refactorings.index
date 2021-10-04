@@ -1,0 +1,33 @@
+1632874517427	Rename resource 'Ex7.jsp'
+1632874526629	Delete element
+1632881964279	Rename package 'controller'
+1632883537787	Rename type 'indexAction'
+1632887997069	Rename type 'ActinoFactory'
+1632889065382	Move 'jspEx' to 'lecture'
+1632889077066	Move 'jsEx' to 'lecture'
+1632889081302	Move 'include' to 'lecture'
+1632889085344	Move 'html' to 'lecture'
+1632889088188	Move 'error' to 'lecture'
+1632889093795	Move 'el_jstl' to 'lecture'
+1632889099875	Move 'cssEx' to 'lecture'
+1632889102539	Move 'auth' to 'lecture'
+1632889378985	Rename resource 'ShopingMall'
+1632889431084	Move 'images' to 'Shopingmall'
+1632889434892	Move 'include' to 'Shopingmall'
+1632889439076	Move 'product_images' to 'Shopingmall'
+1632890400258	Rename type 'ProductDao'
+1632905678685	Delete element
+1632906944723	Delete element
+1632913500782	Move 'Main.jsp' to 'member'
+1632922215797	Rename resource 'member.js'
+1632922223977	Delete element
+1632922234277	Rename resource 'test.js'
+1632922680985	Delete element
+1632922713397	Rename resource 'member.js'
+1632963930029	Delete element
+1633011020755	Delete element
+1633011161456	Delete element
+1633013132526	Delete element
+1633013217357	Delete element
+1633013844793	Delete element
+1633013855053	Rename type 'IdCheckAction2'

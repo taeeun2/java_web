@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "dto.UserInfo,java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<jsp:include page = "/include/header.jsp"/>
+<h1>회원목록</h1>
+		<p><a href='UserInfoAddServlet'>신규 회원</a></p>
+		<% 
+		List<UserInfo> userinfos = 
+			(ArrayList<UserInfo>)request.getAttribute("userinfos");
+		
+		for(UserInfo userInfo : userinfos){
+		%>	
+			<a href = 'UserInfoUpdateServlet?id=<%=userInfo.getId() %>'><%=userInfo.getId() %></a>,
+			<%=userInfo.getPw() %>,
+			<%=userInfo.getName() %>
+			<a href = 'UserInfoDeleteServlet?id=<%=userInfo.getId() %>'>[삭제]</a><br>
+					
+	<% 	}%>
+		
+<jsp:include page="/include/footer.jsp"/>
+<hr>
+</body>
+</html>

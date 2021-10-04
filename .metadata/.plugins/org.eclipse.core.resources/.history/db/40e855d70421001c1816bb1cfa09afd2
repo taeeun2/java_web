@@ -1,0 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script type="text/javascript" src="member.js"></script>  
+</head>
+<body>
+<input type = "button" value = "아이디 중복체크" onclick = "test2()"></td>
+</body>
+</html>

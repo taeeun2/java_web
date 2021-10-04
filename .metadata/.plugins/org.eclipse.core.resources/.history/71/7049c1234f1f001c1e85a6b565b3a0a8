@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "dto.UserInfo,dao.UserInfoDao,java.util.List,java.util.Iterator"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<%	List<UserInfo> list = (List<UserInfo>)session.getAttribute("userinfos"); %>
+</head>
+<body>
+		<table border = '1'>
+		<% 		
+		Iterator<UserInfo> data = list.iterator();
+		while(data.hasNext()) {
+			UserInfo user = data.next();%>
+			</tr>
+			<% out.println("<td><b><a href='/webapp/UserInfoUpdateServlet?id="+user.getId()+"'>"+user.getId()+"</a></b></td>");
+			out.println("<td><b>"+user.getPw()+"</b></td>");
+			out.println("<td><b>"+user.getName()+"</b></td>");%>
+			</tr>
+	<% 	}%>
+		
+		</table>
+		<a href = '/webapp/UserInfoAddServlet'>회원가입</a>
+</body>
+</html>

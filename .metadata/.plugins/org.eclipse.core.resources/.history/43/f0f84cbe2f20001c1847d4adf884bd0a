@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+	.a1{
+		color : black;
+		font-size : 12px;
+		font-family: 'Yeon Sung', cursive;
+	}
+</style>
+</head>
+<%-- session 추가하기 --%>
+<body>
+<div style="background-color:lavender;
+ height:100px; padding : 5px;">
+	<%--	if(userinfo!=null && userinfo.getId() !=null){--%>
+	<%--	<span style="float:right;"><%--오른쪽 정렬--%>
+	<%-- 	<%=userinfo.getName() %>--%>
+		<span style="float:right;"><%--오른쪽 정렬--%>
+		<a class = "a1" href = "#" >LOGIN(CUSTOMER | ADMIN)</a>/
+		<a class = "a1" href = "#" >JOIN</a>/
+		<a class = "a1" href = "#" >CART</a>/
+		<a class = "a1" href = "#" >MY PAGE</a>/
+		<a class = "a1" href = "#" >Q&A(1:1)</a>
+	<%--} else{
+			response.sendRedirect("/webapp/auth/LogInForm.jsp");
+		
+	--%><br><br>
+		<span style="float:right;"><%--오른쪽 정렬--%>
+		<a style="color:black;" href = "#" >Heels</a>/
+		<a style="color:black;" href = "#" >Boots</a>/
+		<a style="color:black;" href = "#" >Sandals</a>/
+		<a style="color:black;" href = "#" >Sneakers</a>/
+		<a style="color:black;" href = "#" >On Sale</a>
+	
+	<%--<% } --%>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/**
+ * 
+ */
+
+
+function alert_button(str) {
+    alert(str);
+}
+function idcheck(){
+	if(document.formm.id.value==""){
+		alert('아이디를 입력하여 주십시오.');
+		document.form.id.focus();
+	}else{
+		var url = "NonageServlet?command = id_check_form&id="
+						+document.form.id.value;
+		window.open(url,"_blank_1",
+		"toolbar=no, menubar=no,scrollbars=yes, resizable=no,width=400,height=200");
+	}
+}
+function test2(){  
+ alert("test2 실행됨");  
+}
+
+function post_zip(){
+	
+}
+
+function go_save(){
+
+}

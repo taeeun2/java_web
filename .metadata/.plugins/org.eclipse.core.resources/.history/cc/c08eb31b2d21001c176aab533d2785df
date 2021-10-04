@@ -1,0 +1,43 @@
+/**
+ * 
+ */
+
+
+function alert_button(str) {
+    alert(str);
+}
+function idcheck(){
+	if(document.formm.id.value==""){
+		alert('아이디를 입력하여 주십시오.');
+		document.form.id.focus();
+	}else{
+		var url = "NonageServlet?command = id_check_form&id="
+						+document.form.id.value;
+		window.open(url,"_blank_1",
+		"toolbar=no, menubar=no,scrollbars=yes, resizable=no,width=400,height=200");
+	}
+}
+
+function post_zip(){
+	
+}
+
+function go_save(){
+
+}
+function searchPost(){
+	var post = formm.post.value;
+	window.open('../lecture/jspEx/Post.jsp', 'pop', 'width=500,height=500');//세번째 인자값 하나로 묶을 것
+	
+}
+	
+function searchPost(){
+	var dong = formm.post.value.trim();
+	console.log(dong.length+'->'+dong);
+	if(dong.length == null || dong == '')
+		alert("~동을 입력해주세요");
+	else{
+		window.open('/webapp/PostServlet?dong='+dong,'pop','width=600,height=500');
+	}
+
+}

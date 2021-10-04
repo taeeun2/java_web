@@ -1,0 +1,5 @@
+package memberex;
+
+public interface MemberDAO {
+
+}

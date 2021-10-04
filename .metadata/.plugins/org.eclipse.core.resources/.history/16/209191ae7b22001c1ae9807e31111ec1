@@ -1,0 +1,55 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import db.DBAction;
+import dto.Member_ex;
+import dto.UserInfo;
+import memberex.MemberDAO;
+
+public class MemberDAOImpl_ex implements MemberDAO{
+
+	private DataSource ds;
+	public void setDataSource(DataSource ds) {
+		this.ds = ds;
+	}
+	public List<Member_ex> selectList() throws Exception{
+		ArrayList<Member_ex> members = null;
+		Connection conn = DBAction.getInstance().getConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM members ORDER BY NAME ASC");
+			members = new ArrayList<Member_ex>();
+			while(rs.next()) {
+				Member_ex member = 
+						new Member_ex().setName(rs.getString("name"))
+						.setPassword(rs.getString("pwd"));
+				members.add(member);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(stmt !=null)stmt.close();
+				if(conn !=null)conn.close();
+			}catch(Exception e) {}
+		}
+		return members;
+	}
+	public int insert(Member_ex member) throws Exception{}
+	int delete(int no)throws Exception;
+	Member_ex selectOne(int no) throws Exception;
+	int update(Member_ex member)throws Exception;
+	Member_ex exist(String email, String password)throws Exception;
+}

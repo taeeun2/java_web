@@ -1,0 +1,6 @@
+/members/add.do=controller.MemberAddController
+/members/list.do=controller.MemberListController
+/members/update.do=controller.MemberUpdateController
+/members/delete.do=controller.MemberDeleteController
+/auth/login.do=controller.LogInController
+/auth/logout.do=controller.LogOutController

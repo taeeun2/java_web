@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<style>
+	body {
+    background-color: ivory;
+    }
+    .id{
+    	margin-bottom : 10px;
+    }
+    .pw{
+    	margin-bottom : 10px;
+    }
+    .btn1{
+    	margin-right : 10px;
+    }
+    .btn2{
+    	margin-right : 8px;
+    }
+    .btn{
+    	text-decoration: none;
+     	font-size:10px;
+      	color: black;
+      	padding:10px 20px 10px 20px;
+      	margin:20px;
+      	display:inline-block;
+      	border-radius: 10px;
+      	transition:all 0.1s;
+      	border-bottom:5px solid black;
+      	background-color: white;
+
+    }
+</style>
+</head>
+
+<body>
+	<form action="/webapp/ServletEx7" method="post">
+		<div align = center>
+		<h1 >로그인</h1>
+		</div>
+		 <div>
+		아이디 : <input class = "id" type = "text" name = "id" size = "10" ><br>
+		비밀번호 : <input class = "pw" type = "password" name = "pw" size = "10"><br>
+		<input class = "btn1" type = "submit" value = "로그인"><input class = "btn2" type = "reset" value ="취소">
+<!--		<a class = "btn" href = "/webapp/UserInfoAddServlet">회원가입</a>-->
+		<input type = 'button' value = '회원가입' onclick = 'location.href = "/webapp/UserInfoAddServlet"'>
+		</div>
+	</form>
+</body>
+</html>
