@@ -19,7 +19,7 @@
 		font-size : 35px;
 	    float: right;
     	position: relative;
-   		left: -50%;
+   		left: -47%;
    		margin-top : 20px;
    		font-family: 'Yeon Sung', cursive;
 	}

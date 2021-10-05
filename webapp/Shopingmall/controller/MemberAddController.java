@@ -18,6 +18,7 @@ public class MemberAddController implements Controller, DataBinding{
 	@Override
 	public String execute(Map<String,Object> model) throws Exception{
 		
+		System.out.println("MemberAddController ½ÇÇà");
 		Member_ex member = (Member_ex)model.get("member");
 		if(member!=null) {
 			memberDAO.insert(member);

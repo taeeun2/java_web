@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="member.js" charset="utf-8"></script>
 </head>
+
 <body>
 <jsp:include page="../include/Header.jsp"/>
+<%-- <% include file = "sub_menu.html"; %> --%>
 <form name = "formm">
 	<table>
 			<th> 회원 가입창</th>

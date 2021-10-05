@@ -38,7 +38,6 @@ public class ApplicationContext {
 			String key = (String) item;
 			String value = props.getProperty(key);
 			if(key.startsWith("jndi.")) {//jndi로 시작하면 데이터 소스로 쓴다.
-				System.out.println("데이터 소스 읽어옴" + key+ "/"+ctx.lookup(value));
 				objTable.put(key, ctx.lookup(value));
 			}else {
 				objTable.put(key, Class.forName(value).newInstance());//클래스 정보로 객체를 생성한다.

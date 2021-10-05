@@ -11,20 +11,24 @@ import dto.Member_ex;
 
 @Component("lecture/members/login.do")
 public class LoginController implements Controller, DataBinding{
-	private MemberDAO memberDao;
+	private MemberDAO memberDAO;
+	
+	
 	public LoginController setMemberDao(MemberDAO memberDao) {
-		this.memberDao = memberDao;
+		this.memberDAO = memberDao;
 		return this;
 	}
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
-		Member_ex loginInfo = (Member_ex)model.get("loginInfo");
-		if(loginInfo == null) {
-			return "lecture/auth/LogInForm.jsp";
+		System.out.println("login_controller");
+		Member_ex member = (Member_ex)model.get("member");
+		
+		if(member == null) {
+			return "lecture/members/LogInForm.jsp";
 		}else {						
-//			Member_ex member = memberDao.exist(loginInfo.getEmail(), loginInfo.getPassword());
-			Member_ex member = new MemberDAOImpl_ex().exist(((HttpServletRequest)model.get("req")).getParameter("email"),
-					((HttpServletRequest)model.get("req")).getParameter("password"));
+//			Member_ex member = memberDao.exist(member.getEmail(), loginInfo.getPassword());
+//			Member_ex member = new MemberDAOImpl_ex().exist(((HttpServletRequest)model.get("req")).getParameter("email"),
+//					((HttpServletRequest)model.get("req")).getParameter("password"));
 			if(member != null) {
 				HttpSession session = (HttpSession)model.get("session");
 				session.setAttribute("member", member);

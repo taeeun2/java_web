@@ -1,9 +1,11 @@
 package controller;
 
 import controller.action.Action;
+import controller.action.ContractAction;
 import controller.action.IdCheckAction;
 import controller.action.IndexAction;
 import controller.action.JoinAction;
+import controller.action.LoginAction;
 
 /*
  * 페이지 컨트롤러
@@ -26,10 +28,12 @@ public class ActionFactory {
 		}else if(command.equals("idCheck")) {
 			action = new IdCheckAction();
 		}
-//		else if(command.equals("login")) {
-//			action = new LoginAction();
-//		}
-		
+		else if(command.equals("login")) {
+			action = new LoginAction();
+		}
+		else if(command.equals("contract")) {
+			action = new ContractAction();
+		}
 		
 		return action;
 		

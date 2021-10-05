@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import db.DBAction;
 import dto.Member;
 
-public class MemberDAOImpl implements MemberDAO{
+public class MemberDAOImpl{
 	
 	private static MemberDAOImpl instance = new MemberDAOImpl();
 	public static MemberDAOImpl getInstance() {return instance;}
