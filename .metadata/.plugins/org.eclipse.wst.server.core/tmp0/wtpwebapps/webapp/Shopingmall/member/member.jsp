@@ -13,7 +13,7 @@
 <%-- <% include file = "sub_menu.html"; %> --%>
 <form name = "formm">
 	<table>
-			<th> 회원 가입창</th>
+			<th> 회원 가입창 수정2!!</th>
 			<tr>
 				<td>아이디</td>
 				<td><input type = "text" name = "id">
@@ -36,7 +36,7 @@
 			<tr>
 				<td>우편번호</td>
 				<td><input type = "text" name = "post">
-				<input type = "button" value = "우편번호 검색", onclick = "searchPost2()">
+				<input type = "button" value = "우편번호 검색", onclick = "searchPost()">
 				</td>
 			</tr>
 			<tr>

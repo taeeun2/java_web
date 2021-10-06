@@ -11,17 +11,44 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-<!-- 
-<bean id="simpleUrlController" class="com.spring.ex01.SimpleUrlController"/>
+
+<!-- SimpleUrlHandleMapping클래스를 이용해 index.do요청 시 SimpleUrlController를 호출하도록 매핑
+ -->
+ <bean id="simpleUrlController" class="com.spring.ex01.SimpleUrlController"/>
+<bean id="memberListController" class="com.spring.ex01.MemberListController">
+	<property name="memberDao" ref="memberDao" />
+</bean>
 <bean id="urlMapping"
   class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
   <property  name="mappings">
     <props>
       <prop key="/test/index.do">simpleUrlController</prop>
+      <prop key="/test/list.do">memberListController</prop>      
     </props>
   </property>  
 </bean>
- -->
+
+
+
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">		
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />		
+		<property name="url" value="jdbc:mysql://localhost:3306/app?serverTimezone=UTC"></property>
+		<property name="username" value="root" />
+		<property name="password" value="java" />
+		<property name="maxActive" value="10"/>        
+        <property name="maxWait" value="-1"/>
+</bean>
+
+<bean id="memberDao" class="dao.MemberDAOImpl_ex">		
+		<property name="dataSource" ref="dataSource" />
+		<!-- <constructor-arg ref="dataSource"/> -->
+</bean> 
+<!-- 데이터 소스 인젝션(셋터 인젝션) 컨스트럭터 인젝션-->
+
+
+
+
  	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -29,6 +56,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="prefix" value="/test/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<!-- 컨트롤러에서 ModelAndView인자로 뷰이름이 반환되면 InternalResourceViewResolver의 프로퍼티 prefix속성에 지정된
+		/test/폴더에서 ModelAndView인자로 넘어온 뷰 이름에 해당되는 jsp를 선택해 DispatcherServlet으로 보냄 -->
 
 	<bean id="userUrlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -38,21 +67,28 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			</props>
 		</property>
 	</bean>
-
+<!-- 	URL요청이 /test/*.do로 시작되면 userController를 요청
+ -->
 	<bean id="userController" class="com.spring.ex02.UserController">
+		<property name="memberDao" ref="memberDao" />
 		<property name="methodNameResolver">
 			<ref local="userMethodNameResolver" />
 		</property>
 	</bean>
-
+	
+	
+	
+<!-- 	methodNameResolver프로퍼티에 userMethodNameResolver를 주입해서 지정한 요청명에 대해 직접 메서드 호출 -->
 	<bean id="userMethodNameResolver"
 		  class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
 				<prop key="/test/login.do">login</prop>
-				<prop key="/test/memberInfo.do">memberInfo</prop> 
+				<prop key="/test/memberInfo.do">memberInfo</prop>
+				 <prop key="/test/update.do">update</prop>
 			</props>
 		</property>
 	</bean>
-
+<!-- 	PropertiesMethodNameResolver를 이용해 /test/login.do로 요청하면 userController의 login 메서드를 호출한다.
+ -->
 </beans>

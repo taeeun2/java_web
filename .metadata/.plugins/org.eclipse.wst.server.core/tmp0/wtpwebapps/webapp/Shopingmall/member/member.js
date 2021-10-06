@@ -12,8 +12,12 @@ function idCheck(){
 		document.formm.id.focus();
 	}else{*/
 	
+	var windowObj;
 	var url = "../idCheck/idCheck.html";
-		window.open(url,"pop","width=500,height=500");
+	windowObj = window.open(url,"pop","width=500,height=500");
+		
+	windowObj.document.getElementById("t_id").value = document.getElementById('id').value;
+
 		/*var url = "../../lecture/book/Ajax/ajax3.html";
 		window.open(url,"pop","width=500,height=500");*/
 		
@@ -57,7 +61,7 @@ function go_save(){
 	
 }
 	*/
-function searchPost(){
+/*function searchPost2(){
 	var dong = formm.post.value.trim();
 	
 	if(dong.value==""){
@@ -74,5 +78,21 @@ function searchPost(){
 function searchPost2(){
 	window.open('../../lecture/jspEx/Post.jsp', 'pop', 'width=500,height=500');//세번째 인자값 하나로 묶을 것
 	
+}*/
+
+function searchPost(){
+		var post = formm.post.value;
+		window.open('jspEx/Post.jsp', 'pop', 'width=500,height=500');//세번째 인자값 하나로 묶을 것
+		
+		
+	}
+
+function searchPost(){
+	var dong = formm.post.value.trim();
+	console.log(dong.length+'->'+dong);
+	if(dong.length == null || dong == '')
+		alert("~동을 입력해주세요");
+	else{
+		window.open('/webapp/PostServlet?dong='+dong,'pop','width=600,height=500');
+	}
 }
-	

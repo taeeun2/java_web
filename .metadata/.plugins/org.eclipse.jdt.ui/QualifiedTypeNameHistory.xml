@@ -38,7 +38,6 @@
     <fullyQualifiedTypeName name="javax.naming.Context"/>
     <fullyQualifiedTypeName name="javax.naming.InitialContext"/>
     <fullyQualifiedTypeName name="javax.sql.DataSource"/>
-    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.classfile.Method"/>
@@ -49,7 +48,10 @@
     <fullyQualifiedTypeName name="java.awt.Component"/>
     <fullyQualifiedTypeName name="com.sun.xml.internal.ws.api.Component"/>
     <fullyQualifiedTypeName name="controller.Component"/>
-    <fullyQualifiedTypeName name="dto.Member"/>
     <fullyQualifiedTypeName name="dto.Member_ex"/>
     <fullyQualifiedTypeName name="util.ServletRequestDataBinder"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="dto.Member"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.Controller"/>
 </qualifiedTypeNameHistroy>

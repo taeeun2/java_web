@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import db.DBAction;
 import dto.Member;
+import dto.UserInfo;
 
 public class MemberDAOImpl{
 	
@@ -69,4 +70,37 @@ public class MemberDAOImpl{
 		
 		return result;
 	}
+	
+	public Member getMember(String id) throws Exception{
+		
+		Member member = null;
+		Connection conn = DBAction.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select id, pwd, name from shopingmall.member where id = ?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member.setId(rs.getString("id"));
+				member.setPwd(rs.getString("pwd"));
+				member.setName(rs.getString("name"));
+			}
+			else {
+//				throw new Exception(""); 예외 발생 시 예외 처리!
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt !=null)pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {}
+		}
+		
+		return member;
+		
+	}
+	
 }

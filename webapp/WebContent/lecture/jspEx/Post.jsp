@@ -38,7 +38,7 @@
 				alert("~동을 입력해주세요");
 			else{
 				form.method = "post";
-				form.action = '../../PostServlet?dong='+encodeURI(dong);
+				form.action = encodeURI('../../webapp/PostServlet?dong='+dong);
 				form.submit();
 			}
 		}
