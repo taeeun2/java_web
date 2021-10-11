@@ -5,6 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script src = "http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="member.js" charset="utf-8"></script>
 </head>
 
@@ -13,12 +14,11 @@
 <%-- <% include file = "sub_menu.html"; %> --%>
 <form name = "formm">
 	<table>
-			<th> 회원 가입창 수정2!!</th>
+			<th> 회원 가입창 </th>
 			<tr>
 				<td>아이디</td>
-				<td><input type = "text" name = "id">
+				<td><input type = "text" id = "id" name = id>
 				<input type = "button" value = "아이디 중복체크" onclick = "idCheck()"></td>
-				</td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>

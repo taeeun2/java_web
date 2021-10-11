@@ -42,6 +42,14 @@
 				form.submit();
 			}
 		}
+	
+	function sendAddress(zipcode,sido,gugun,dong){
+		
+		var address = sido + " " + gugun + " " + dong;
+        opener.document.formm.post.value = zipcode;
+        opener.document.formm.address.value = address;
+        self.close();
+	}
 </script>
 <body>
 	<h1>우편번호 검색</h1>
@@ -61,9 +69,10 @@
 		%>
 		<% for(AddressVo  data : list){ %>
 			<tr>
-				<td><%= data.getZipCode() %></td>
-				<td><a href = "#" ><%= data.getZipCode() %></a>
-				<%= data.getSido() %>', '<%= data.getGugun() %>', '<%= data.getDong() %>
+				<td><a href = "javascript:sendAddress('<%= data.getZipCode()%>','<%=data.getSido()%>',
+                 '<%= data.getGugun()%>','<%= data.getDong() %>');"><%= data.getZipCode() %></a><td>
+				
+				<%= data.getSido() %> <%= data.getGugun() %> <%= data.getDong() %>
 				</td>	
 			</tr>	
 		<%} %>	

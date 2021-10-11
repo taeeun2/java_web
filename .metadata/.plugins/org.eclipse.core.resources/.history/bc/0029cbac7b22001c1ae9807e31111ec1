@@ -1,7 +1,0 @@
-package controller;
-
-import java.util.Map;
-
-public interface Controller {
-	public void execute(Map<String, Object> model)throws Exception;
-}

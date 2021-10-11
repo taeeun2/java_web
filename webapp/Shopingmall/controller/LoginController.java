@@ -1,12 +1,11 @@
 package controller;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import dao.MemberDAO;
-import dao.MemberDAOImpl_ex;
 import dto.Member_ex;
 
 @Component("lecture/members/login.do")
@@ -34,6 +33,7 @@ public class LoginController implements Controller, DataBinding{
 				session.setAttribute("member", member);
 				return "redirect:../members/list.do";	   		
 			}else {
+//				"<script>window.open('/auth/LogInFail.jsp','new','width=790, height=870'); </script>");;
 				return "/auth/LogInFail.jsp";
 			}
 		}

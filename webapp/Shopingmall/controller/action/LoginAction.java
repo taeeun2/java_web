@@ -13,7 +13,7 @@ import dto.Member;
 public class LoginAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
-				String url = "lecture/login_fail.jsp";
+				String url = "lecture/auth/LoginFail.jsp";
 				HttpSession session = request.getSession();
 				String id = request.getParameter("id");
 				String pwd = request.getParameter("pwd");

@@ -73,7 +73,7 @@ public class MemberDAOImpl{
 	
 	public Member getMember(String id) throws Exception{
 		
-		Member member = null;
+		Member member = new Member();
 		Connection conn = DBAction.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

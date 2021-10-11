@@ -1,7 +1,0 @@
-package dao;
-
-import memberex.MemberDAO;
-
-public class MemberDAOImpl_ex implements MemberDAO{
-
-}

@@ -5,15 +5,17 @@
     <title>자식창</title>
   </head>
    <script src = "http://code.jquery.com/jquery-latest.min.js"></script>
-    부모창에서 전달받은 값 : <input type="text" id="childText" />
-    <button type="button" name="button" onclick="windowclose();">부모에게 전달</button>
+    부모창에서 전달받은 값 : <input type="text" id="c_id" />
+    <button type="button" name="button" onclick="sendToParent();">부모에게 전달</button>
     <script type="text/javascript">
-      var id = opener.$("#parentText").val();
-      $("#childText").val(id);
+    /*   var id = opener.$("#p_id").val();
+      $("#c_id").val(id);
       
-      $("#parentText",opener.document).val($("#childText").val());
-      
-      
+       */
+      function sendToParent(){
+     	 $("#p_id",opener.document).val($("#c_id").val());
+      	 self.close();
+      }
       
       /* function sendToParent(){
         var txt = document.getElementById("childText").value +"자식창 값을 +합니다.";

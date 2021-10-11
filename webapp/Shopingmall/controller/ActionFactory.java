@@ -6,6 +6,8 @@ import controller.action.IdCheckAction;
 import controller.action.IndexAction;
 import controller.action.JoinAction;
 import controller.action.LoginAction;
+import controller.action.ProductDetailAction;
+import controller.action.ProductKindAction;
 
 /*
  * 페이지 컨트롤러
@@ -33,6 +35,12 @@ public class ActionFactory {
 		}
 		else if(command.equals("contract")) {
 			action = new ContractAction();
+		}
+		else if(command.equals("product_detail")) {
+			action = new ProductDetailAction();
+		}
+		else if(command.equals("product_kind")) {
+			action = new ProductKindAction();
 		}
 		
 		return action;

@@ -6,17 +6,18 @@
 function alert_button(str) {
     alert(str);
 }
+var openWin;
 function idCheck(){
 	/*if(document.formm.id.value==""){
 		alert('아이디를 입력하여 주십시오.');
 		document.formm.id.focus();
 	}else{*/
 	
-	var windowObj;
-	var url = "../idCheck/idCheck.html";
-	windowObj = window.open(url,"pop","width=500,height=500");
-		
-	windowObj.document.getElementById("t_id").value = document.getElementById('id').value;
+
+	var url = "../idCheck/idCheck_2.html";
+	window.open(url,"pop","width=500,height=500");
+	
+
 
 		/*var url = "../../lecture/book/Ajax/ajax3.html";
 		window.open(url,"pop","width=500,height=500");*/
@@ -93,6 +94,6 @@ function searchPost(){
 	if(dong.length == null || dong == '')
 		alert("~동을 입력해주세요");
 	else{
-		window.open('/webapp/PostServlet?dong='+dong,'pop','width=600,height=500');
+		window.open(encodeURI('/webapp/PostServlet?dong='+dong),'pop','width=600,height=500');
 	}
 }

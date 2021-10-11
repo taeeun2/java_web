@@ -38,11 +38,27 @@
 <div style = "background-color : whitesmoke">
 	<br>
 <!-- <form id = "join" action = "NonageServlet?command=join" method="post"name="formm"> -->
-	<c:set var = "newProductList" value = "${requestScope.newProductList}"></c:set>
+	<%-- <c:set var = "newProductList" value = "${requestScope.newProductList}"></c:set>
+		<c:forEach var = "newProduct"  items =  "${newProductList}">
+		<div id = "item">
+			<a href = "NonageServlet?command=product_detail&pseq=${newProduct.pseq}">
+			<img src = "http://localhost:8080/webapp/Shopingmall/product_images/${newProduct.image}" width = 200 height = 200>
+			<h3>${newProduct.name}</h3>
+			<p>${newProduct.price2}</p>
+			</a>
+		</div>
+		</c:forEach> --%>
+	
+	 <c:set var = "newProductList" value = "${requestScope.newProductList}"></c:set>
 			<table>
 			<tr>
+			
 			<c:forEach var = "newProduct"  items =  "${newProductList}">
-				<td><img src = "http://localhost:8080/webapp/Shopingmall/product_images/${newProduct.image}" width = 200 height = 200></td>
+			<td>
+				<a href = "NonageServlet?command=product_detail&pseq=${newProduct.pseq}">
+				<img src = "http://localhost:8080/webapp/Shopingmall/product_images/${newProduct.image}" width = 200 height = 200>
+				</a>
+			</td>
 			</c:forEach>
 			</tr>
 			<tr>

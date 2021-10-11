@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>주소로 장소 표시하기</title>
+    
+    
+<style>
+
+
+ .dot {overflow:hidden;float:left;width:12px;height:12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');}    
+.dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
+.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+.number {font-weight:bold;color:#ee6152;}
+.dotOverlay:after {content:'';position:absolute;margin-left:-6px;left:50%;bottom:-8px;width:11px;height:8px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')}
+.distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
+.distanceInfo .label {display:inline-block;width:50px;}
+.distanceInfo:after {content:none;} 
+
+
+
+table{
+	width : 100%;
+	border-collapse : collapse;
+	text-align : center;
+	margin-top : 20px;
+	}
+th, td{
+		padding: 10px;
+		border: 1px solid #444444;
+	}
+th{
+		background-color : ivory;
+	}
+	
+	
+</style>
+</head>
+<body>
+<div id="map" style="width:100%;height:350px;"></div>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9ba249be129f7da17d00610164a79f2&libraries=services"></script>
+<script>
+
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 장소 검색 객체를 생성합니다
+var ps = new kakao.maps.services.Places(map); 
+
+//마커 저장
+var markers=[];
+
+//카테고리 저장
+var cartegory=[];
+
+//거리 계산
+var distanceOverlay;
+
+//장소이름 저장
+var names = [];
+
+var count = 0;
+
+//카테고리 저장(순서 출력을 위해)
+var seq = [];
+
+//장소 총 거리 저장
+var total_distances = [];
+
+$(document).ready(function(){
+    $("#restaurant").change(function(){
+        if($("#restaurant").is(":checked")){
+        	seq.push("음식점");
+        	ps.categorySearch('FD6', placesSearchCB, {useMapBounds:true}); 
+        }
+    });
+    $("#cafe").change(function(){
+        if($("#cafe").is(":checked")){
+        	seq.push("카페");
+        	ps.categorySearch('CE7', placesSearchCB, {useMapBounds:true}); 
+        }
+    });
+    $("#culture").change(function(){
+        if($("#culture").is(":checked")){
+        	seq.push("문화시설");
+        	ps.categorySearch('CT1', placesSearchCB, {useMapBounds:true}); 
+        }
+    });
+    $("#tourism").change(function(){
+        if($("#tourism").is(":checked")){
+        	seq.push("관광명소");
+        	ps.categorySearch('AT4', placesSearchCB, {useMapBounds:true}); 
+        }
+    });
+    $("#lodgment").change(function(){
+        if($("#lodgment").is(":checked")){
+        	seq.push("숙박");
+        	ps.categorySearch('AD5', placesSearchCB, {useMapBounds:true}); 
+        }
+    });
+    $("#mart").change(function(){
+        if($("#mart").is(":checked")){
+        	seq.push("대형마트");
+        	ps.categorySearch('MT1', placesSearchCB, {useMapBounds:true}); 
+        }
+    });
+    
+   
+}); 
+
+// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+        /* for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);    
+        } */
+        //랜덤 장소 보여줌
+        displayMarker(data[Math.floor(Math.random()*data.length)]);
+    }
+}
+
+function findSearch(){
+	var place = $('#place').val();
+	ps.keywordSearch(place,placesSearchCB2);
+}
+
+//키워드 검색 완료 시 호출되는 콜백함수 입니다
+function placesSearchCB2 (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        var bounds = new kakao.maps.LatLngBounds();
+  
+         for (var i=0; i<data.length; i++) {
+            //displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }       
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+    } 
+}
+
+
+// 지도에 마커를 표시하는 함수입니다
+function displayMarker(place) {
+    // 마커를 생성하고 지도에 표시합니다
+      var marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    }); 
+     
+    //마커 지도 위에 표시
+    //marker.setMap(map);
+    //생성된 마커 배열에 추가
+    markers.push(marker); 
+    //장소 이름 배열에 추가
+    names.push(place.place_name);
+    
+    //장소 클릭 시 장소 명 나오게
+    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name+'</div>');
+    infowindow.open(map, marker);
+    
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+	    
+        //infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '<br><a href ="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query='+place.place_name+'">링크</a></div>');
+        
+        //마커 클릭 시 작은 창 열리게 하기
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '<br><a href ="#" onclick = "put(\''+place.place_name+'\')">링크</a></div>');
+        infowindow.open(map, marker);
+    });
+}
+
+function put(place_name){
+	var url = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query="+place_name;
+	window.open(url,"pop","width=500,height=500");
+}
+
+//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setMarkers(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showMarkers() {
+    setMarkers(map);
+   // markers = [];
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideMarkers() {
+    setMarkers(null);    
+}
+
+
+//마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
+//그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
+//HTML Content를 만들어 리턴하는 함수입니다
+function getTimeHTML(distance) {
+
+ // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+ var walkkTime = distance / 67 | 0;
+ var walkHour = '', walkMin = '';
+
+ // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+ if (walkkTime > 60) {
+     walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+ }
+ walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+ // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+ var bycicleTime = distance / 227 | 0;
+ var bycicleHour = '', bycicleMin = '';
+
+ // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+ if (bycicleTime > 60) {
+     bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+ }
+ bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+
+ //계산한 것
+ //차량의 시속 평균 50km/h 자전거의 분속 -> 50/60 -> 0.833이므로 833m/min
+ 
+ var carTime = distance/833 |0;
+ var carHour = '',carMin='';
+ 
+ if (carTime > 60) {
+	 carHour = '<span class="number">' + Math.floor(carTime / 60) + '</span>시간 '
+ }
+ carMin = '<span class="number">' + carTime % 60 + '</span>분'
+ 
+ 
+
+ 
+ // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+ var content = '<ul class="dotOverlay distanceInfo">';
+ content += '    <li>';
+ content += '        <span class="label">총거리</span><span class="number">' + Math.round(distance) + '</span>m';
+ content += '    </li>';
+ content += '    <li>';
+ content += '        <span class="label">도보</span>' + walkHour + walkMin;
+ content += '    </li>';
+ content += '    <li>';
+ content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+ content += '    </li>';
+ //차량 추가
+ content += '    <li>';
+ content += '        <span class="label">자동차</span>' + carHour + carMin;
+ content += '    </li>';
+ content += '</ul>'
+
+ return content;
+}
+
+//선 색깔 바꾸기
+var colors = ['#00008C','#C71585','#FF9100','#9932CC','#61F3EB','FFAE00', '#000000', '#FFB4FF','#40E0D0'];
+var colcnt = 0;
+
+function distance(){
+	/* for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    } */
+    
+    //getLat : 위도 반환 / getLng : 경도 반환
+    var latlng = [];
+    //거리 배열
+    var distance = 0;
+    
+   	for(var i=0;i<markers.length;i++){
+   		latlng[i]=markers[i].getPosition();
+   	}
+  
+   	
+   	
+  //  var distance = Math.sqrt(Math.pow(Math.abs(latlng[0].getLat()-latlng[1].getLat()),2)+Math.pow(Math.abs(latlng[0].getLng()-latlng[1].getLng()),2));
+    //미터로 거리 환산
+    //distance = distance * 60 * 1.1515 * 1609.344;
+    
+   
+    
+    for(var i=0;i<markers.length-1;i++){
+    	distance += Math.sqrt(Math.pow(Math.abs(latlng[i].getLat()-latlng[i+1].getLat()),2)+Math.pow(Math.abs(latlng[i].getLng()-latlng[i+1].getLng()),2))* 60 * 1.1515 * 1609.344;
+    	//alert(distance);
+    }
+    
+	
+    total_distances.push(distance);
+    showDistance(getTimeHTML(distance),latlng[0]);
+    
+    //선을 구성하는 좌표 배열
+    var linePath = [
+    	latlng
+    ];
+    
+    //지도에 표시할 선 생성
+    
+	  var polyline = new kakao.maps.Polyline({
+		    path: linePath, // 선을 구성하는 좌표배열 입니다
+		    strokeWeight: 5, // 선의 두께 입니다
+		    strokeColor: colors[colcnt++], // 선의 색깔입니다
+		    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'solid' // 선의 스타일입니다
+		});
+    
+    //지도에 선 표시
+    polyline.setMap(map);
+    //alert(distance1); 
+}
+
+function returnDistance(x1,x2,y1,y2){
+	var rd = parseFloat(Math.sqrt(Math.pow(Math.abs(x1-x2),2))+parseFloat(Math.pow(Math.abs(y1-y2),2)));
+	alert(rd);
+	//미터로 거리 환산
+	rd = rd * 60 * 1.1515 * 1609.344;
+	alert(rd);
+	return  rd;
+}
+
+
+
+
+
+
+function showDistance(content, position) {
+    
+    if (distanceOverlay) { // 커스텀오버레이가 생성된 상태이면
+        
+        // 커스텀 오버레이의 위치와 표시할 내용을 설정합니다
+        distanceOverlay.setPosition(position);
+        distanceOverlay.setContent(content);
+        
+    } else { // 커스텀 오버레이가 생성되지 않은 상태이면
+        
+        // 커스텀 오버레이를 생성하고 지도에 표시합니다
+        distanceOverlay = new kakao.maps.CustomOverlay({
+            map: map, // 커스텀오버레이를 표시할 지도입니다
+            content: content,  // 커스텀오버레이에 표시할 내용입니다
+            position: position, // 커스텀오버레이를 표시할 위치입니다.
+            xAnchor: 0,
+            yAnchor: 0,
+            zIndex: 3  
+        });      
+    }
+}
+
+function randomDate(){
+	showMarkers();
+	distance(); 
+	
+	str ='<tr>';
+	str+='<td>';
+	for(var i=0;i<names.length;i++){
+		if(i!=names.length-1)
+			str+=names[i]+"---> ";
+		else
+			str+=names[i];
+	}
+	str+='</td><td>'+ Math.round(total_distances[count++])+'m</td></tr>'
+	//str+='</td><td>'+distance+'</td>';
+	$('#course').append(str);
+	//체크박스 초기화하기
+	$(':checkbox:checked').prop('checked',false);
+	//마커 초기화하기
+	
+	//순서 입력
+	var sequences="";
+	for(var i=0;i<seq.length;i++){
+		sequences+=(i+1)+"."+seq[i]+" ";
+	}
+	
+	$('#order').val(sequences);
+	
+	
+	seq=[];
+	markers=[];
+	names = [];
+}
+
+
+//마커이미지의 주소, 마커이미지의 크기, 마커이미지의 옵션, 마커이미지 생성
+var imageSrc = ['http://localhost:8080/images/subway.png','http://localhost:8080/images/convenience.png','http://localhost:8080/images/parking.png','http://localhost:8080/images/gas_station2.jpeg'];
+var imageSize = new kakao.maps.Size(30, 30);
+var imageOption = {offset: new kakao.maps.Point(27, 69)};
+var markerImage;
+
+
+function gas_station(){
+	markerImage = new kakao.maps.MarkerImage(imageSrc[3], imageSize, imageOption);
+	ps.categorySearch('OL7', placesSearchCB3, {useMapBounds:true});
+}
+
+function park(){
+	markerImage = new kakao.maps.MarkerImage(imageSrc[2], imageSize, imageOption);
+	ps.categorySearch('PK6', placesSearchCB3, {useMapBounds:true});
+}
+function convenience(){
+	markerImage = new kakao.maps.MarkerImage(imageSrc[1], imageSize, imageOption);
+	ps.categorySearch('CS2', placesSearchCB3, {useMapBounds:true}); 
+}
+function subway(){
+	markerImage = new kakao.maps.MarkerImage(imageSrc[0], imageSize, imageOption);
+	ps.categorySearch('SW8', placesSearchCB3, {useMapBounds:true}); 
+}
+
+var markers2 = [];
+function placesSearchCB3 (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+         for (var i=0; i<data.length; i++) {
+            displayMarker2(data[i]);    
+        } 
+        //랜덤 장소 보여줌
+    }
+}
+
+
+function displayMarker2(place) {
+    // 마커를 생성하고 지도에 표시합니다
+      var marker = new kakao.maps.Marker({
+    	image: markerImage,  
+    	map: map,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    }); 
+     
+    markers2.push(marker);
+    // 마커에 클릭이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+	    
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        infowindow.open(map, marker);
+    });
+}
+
+function erase(){
+	 for (var i = 0; i < markers2.length; i++) {
+	        markers2[i].setMap(null);
+	    }
+	 markers2 = [];
+}
+
+</script>
+<form>
+지역명 : <input type = "text" id = "place" name = "place"/>
+<input type = "button" onclick="findSearch()" value="검색"/><br>
+키워드 : <input type ="checkbox" id = "restaurant"/>음식점
+	   <input type = "checkbox" id = "cafe"/>카페
+	   <input type = "checkbox" id = "culture"/>문화시설
+	   <input type = "checkbox" id = "tourism"/>관광명소
+	   <input type = "checkbox" id = "lodgment"/>숙박
+	   <input type = "checkbox" id = "mart"/>대형마트
+	   <br>원하는 순서대로 카테고리를 선택하세요<br>
+ <input style="text-align:center; width:300px" type = "text" id = "order" value = "순서"/>
+ <input type = "button" value = "랜덤 데이트코스" onclick = "randomDate()"/><br>
+ <input type = "button" value = "주변 주차장 보기" onclick = "park()"/>
+ <input type = "button" value = "주변 편의점 보기" onclick = "convenience()"/>
+ <input type = "button" value = "주변 지하철역 보기" onclick = "subway()"/>
+ <input type = "button" value = "주변 주유소 보기" onclick = "gas_station()"/>
+ <input type = "button" value = "지우기" onclick = "erase()"/>
+<table id = "course">
+	<tr>
+		<th>데이트 코스</th>
+		<th>총 거리</th>
+	</tr>
+</table>
+
+
+</form>
+</body>
+</html>

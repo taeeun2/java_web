@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<script src = "http://code.jquery.com/jquery-latest.min.js"></script>
+
+<title>Insert title here</title>
+<style>
+	table{
+	width : 100%;
+	border-collapse : collapse;
+	text-align : center;
+	margin-top : 20px;
+	}
+	th, td{
+		padding: 10px;
+		border: 1px solid #444444;
+	}
+	.title{
+		 align : center;
+		 background-color : slateblue;
+		 color : white;
+		 border-bottom : double black;
+		 
+	}
+	th{
+		background-color : ivory;
+	}
+</style>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type = "text/javascript">
+
+	window.onload = function ()
+	{
+		var dong = opener.$("#zip_num").val();
+		$("#dong").val(dong);
+		searchPost();
+	// 실행할 자바스크립트 함수
+	
+	}
+
+
+	function searchPost(){
+			/* var form = document.form;
+			var dong = form.dong.value.trim(); */
+			
+			var _dong = $("#dong").val();
+			
+			if(_dong.length == null || _dong == ''){
+				alert("~동을 입력해주세요");
+				return;
+			}
+			
+			$.ajax({
+				type:"post",
+				//dataType : "text",
+				async : false,
+				url : "/post",
+				data : {dong : _dong},
+				success:function(data){
+					var post = JSON.parse(data);
+					var i = 0;
+					
+					
+						 post.forEach(function(item){
+							//alert(item.sido);
+							
+									
+							
+						 	str='<tr>';
+							str+='<td><a href="#" onclick="put(\'' + item.zipcode + '\',\'' + item.sido + '\',\'' + item.gugun + '\',\'' + item.dong + '\',\'' + item.ri + '\')">'+item.zipcode+'</a></td>';
+							//str+='<td>'+item.zipcode+'</td>';
+							str+="<td>" +item.sido;
+							str+=' '+item.gugun;
+							str+=' '+item.dong;
+							str+=' '+item.ri;
+							str+=' '+item.bldg;
+							str+=' '+item.bunji;
+							str+='</tr>'
+							$('#zipcode').append(str);
+					
+									
+						}) 
+						
+					
+					
+				},
+			});
+		
+	
+	}
+	
+	function put(zipcode,sido,gugun,dong,ri){
+		var address = sido + " " + gugun + " " + dong+" "+ri;
+        opener.document.formm.zip_num.value = zipcode;
+        opener.document.formm.address.value = address;
+        self.close(); 
+	}
+	
+	function sendAddress(sido,gugun,dong,ri,bldg,bunji){
+		
+		var address = sido + " " + gugun + " " + dong+" "+ri+" "+bldg;
+        opener.document.formm.zip_num.value = zipcode;
+        opener.document.formm.address.value = address;
+        self.close(); 
+	}
+</script>
+<body>
+
+<h1>우편번호 검색</h1>
+
+	<span th:text="${test}"></span>
+	<form name = "form">
+	 	동 이름 : <input type = "text" name = "dong" id = "dong"/>
+	 	<input type = "button" value = "찾기" onclick = "searchPost()"/>
+	</form>
+	<table id = "zipcode">
+		<tr>
+			<th>우편번호</th>
+			<th>주소</th>
+		</tr>
+	</table>
+</body>
+</html>

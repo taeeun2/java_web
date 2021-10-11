@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <meta charset="EUC-KR">
+
 <title>Insert title here</title>
 <style>
 
@@ -57,9 +58,12 @@
 
 <!-- <div style="background-color:lavender;
  height:80px; padding : 5px;"> -->
+ <%-- <c:set var = "loginUser" value = "${requestScope.loginUser}">
+ ${loginUser.name}
+ </c:set> --%>
 		<span style="float:right;"><%--오른쪽 정렬--%>
-		<a class = "a1" href = "#" >LOGIN(CUSTOMER | ADMIN)</a>
-		<a class = "a1" href = "http://localhost:8080/webapp/Shopingmall/member/join.jsp" >JOIN</a>
+		<a class = "a1" href = "http://localhost:8080/webapp/Shopingmall/member/login.jsp" >LOGIN(CUSTOMER | ADMIN)</a>
+		<a class = "a1" href = "http://localhost:8080/webapp/Shopingmall/member/member.jsp" >JOIN</a>
 		<a class = "a1" href = "#" >CART</a>
 		<a class = "a1" href = "#" >MY PAGE</a>
 		<a class = "a1" href = "#" >Q&A(1:1)</a>
@@ -67,11 +71,11 @@
 
 		<br><br>
 		<span style="float:right;"><%--오른쪽 정렬--%>
-		<a class = "a2" href = "http://localhost:8080/webapp/Shopingmall/product_show/Heels.jsp" >Heels</a>
-		<a class = "a2" href = "#" >Boots</a>
-		<a class = "a2" href = "#" >Sandals</a>
-		<a class = "a2" href = "#" >Sneakers</a>
-		<a class = "a2" href = "#" >On Sale</a>
+		<a class = "a2" href = "http://localhost:8080/webapp/NonageServlet?command=product_kind&kind=1" >Heels</a>
+		<a class = "a2" href = "http://localhost:8080/webapp/NonageServlet?command=product_kind&kind=2" >Boots</a>
+		<a class = "a2" href = "http://localhost:8080/webapp/NonageServlet?command=product_kind&kind=3" >Sandals</a>
+		<a class = "a2" href = "http://localhost:8080/webapp/NonageServlet?command=product_kind&kind=4" >Sneakers</a>
+		<a class = "a2" href = "http://localhost:8080/webapp/NonageServlet?command=product_kind&kind=5" >On Sale</a>
 		</span>
 	
 	<%--<% } --%>

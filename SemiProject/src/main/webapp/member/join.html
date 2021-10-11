@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<title>Insert title here</title>
+<script src = "http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="member.js" charset="utf-8"></script>
+</head>
+<body>
+<form action = "../join" method = "POST" name="formm">
+	아이디 : <input type = "text" name = "id" id = "id"/> 
+	<input type = "button" value = "아이디 중복체크" onclick = "idCheck()"><br>
+	이메일 : <input type = "text" name ="email"/><br>
+	비밀번호 : <input type = "text" name ="pwd"/><br>
+	이름 : <input type = "text" name ="name"/><br>
+	우편번호 : <input type = "text" name ="zip_num" id = "zip_num"/>
+	<input type = "button" value = "우편번호 검색" onclick = "searchPost()"><br>
+	주소 : <input type = "text" name ="address"/><br>
+	상세 주소 : <input type = "text" name ="detail_address"/><br>
+	휴대폰번호 : <input type = "text" name = "phone"/><br>
+	<input type = "button" value = "가입하기" onclick = "go_save()">
+	<input type = "reset" value = "다시입력">
+</form>
+</body>
+</html>

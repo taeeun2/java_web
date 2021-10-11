@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="DiaryMapper">
+    
+    <insert id="insert">
+    	insert into semi.diary(subject,content,user_id) values(#{subject},#{content},'aaa');
+    </insert>
+    
+    <select id = "list">
+    	select * from semi.diary;
+    </select>
+    
+</mapper>

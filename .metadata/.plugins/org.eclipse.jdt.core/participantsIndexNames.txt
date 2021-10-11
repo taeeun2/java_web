@@ -23,8 +23,12 @@ C:\Users\±èÅÂÀº\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\js
 \webapp\src
 C:\Users\±èÅÂÀº\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3598112010.index
 \webapp\src
+C:\Users\±èÅÂÀº\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3869956008.index
+\spa\src\main\java
 C:\Users\±èÅÂÀº\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1053603049.index
 \webapp\src
+C:\Users\±èÅÂÀº\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2601675589.index
+\spa\src\main\java
 C:\Users\±èÅÂÀº\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2847286961.index
 \webapp\src
 C:\Users\±èÅÂÀº\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\526395229.index

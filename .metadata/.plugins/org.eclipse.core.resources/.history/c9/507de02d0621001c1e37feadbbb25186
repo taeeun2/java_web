@@ -1,7 +1,0 @@
-/**
- * 
- */
-
-function printDate(){
-	alert("안녕");
-}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body align = "center">
+<h1>Main</h1><br>
+<a th:if="${log.equals('logout')}" href = "logout">로그아웃</a>
+<a th:unless="${log.equals('logout')}" href = "login">로그인</a>
+<a th:unless="${log.equals('logout')}" href = "member/join.html">회원가입</a>
+<a th:if="${log.equals('logout')}" href = "edit">회원정보 수정</a>
+<a th:if="${log.equals('logout')}" href = "map">랜덤 데이트 코스 검색</a>
+<br>
+<span th:text="${User}"></span>
+<span th:if="${log.equals('logout')}">님 환영합니다.</span>
+</body>
+</html>

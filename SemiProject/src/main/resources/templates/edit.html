@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div align="center">
+<h1>회원정보 수정</h1>
+<form action = "edit" method = "POST">
+
+	아이디 : <input type="text" name = "id" th:value="${id}" readonly/><br>
+	이메일 : <input type = "text" name ="email" th:value="${email}"/><br>
+	비밀번호 : <input type = "text" name ="pwd" th:value="${pwd}"/><br>
+	이름 : <input type = "text" name ="name" th:value="${name}"/><br>
+	우편번호 : <input type = "text" name ="zip_num" th:value="${zip_num}"/><br>
+	주소 : <input type = "text" name ="address" th:value="${address}"/><br>
+	휴대폰번호 : <input type = "text" name = "phone" th:value="${phone}"/><br>
+	<input type = "submit" value = "수정"/>
+</form>
+</div>
+</body>
+</html>
