@@ -6,7 +6,7 @@ public class Date_course {
 	private String place_address;
 	private int sequence;
 	private String img;
-	private String coment;
+	private String comment;
 	public String getUser_place_id() {
 		return user_place_id;
 	}
@@ -37,11 +37,11 @@ public class Date_course {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	public String getComent() {
-		return coment;
+	public String getComment() {
+		return comment;
 	}
-	public void setComent(String coment) {
-		this.coment = coment;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	
 	

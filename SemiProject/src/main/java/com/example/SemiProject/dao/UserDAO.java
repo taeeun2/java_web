@@ -3,6 +3,7 @@ package com.example.SemiProject.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -28,10 +29,18 @@ public interface UserDAO {
 	@Select("select * from semi.user_place where place_id=#{id}")
 	public User_place idCheck2(String id)throws Exception;
 
-	@Insert("insert into semi.user_place values(#{place_id},#{user_id},#{total_distance})")
+	@Insert("insert into semi.user_place(place_id,user_id,total_distance) values(#{place_id},#{user_id},#{total_distance})")
 	public void insertUserPlace(Map<String, String> map) throws Exception;
 
 	@Select("select * from semi.user_place where user_id=#{id}")
 	public List<User_place> getPlace(String id)throws Exception;
+	
+	@Delete("delete from semi.user_place where place_id=#{id}")
+	public void deleteUserPlace(String id)throws Exception;
+	
+	
+	@Update("update semi.user_place set viewYn = 'y' where place_id = #{id}")
+	public void viewPlace(String id)throws Exception;
+	
 	
 }

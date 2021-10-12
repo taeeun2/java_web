@@ -1,98 +1,28 @@
-<!-- <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org">
-<head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
-<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
-<title>Insert title here</title>
-</head>
-
-<style>
-
-	*{
-		/* font-family:sans-serif; */
-		font-family: 'Yeon Sung', cursive; 
-	}
-	.title{
-		font-size : 35px;
-	    float: right;
-    	position: relative;
-   		left: -47%;
-   		margin-top : 20px;
-   		
-	}
-	*{
-		text-decoration: none;
-		color : black;
-	}
-	
-	
-	a{
-		font-size : 15px;
-		margin : 5px;
-		float : right;
-	
-	}
-	
-	p{
-		font-size : 20px;
-		margin : 5px;
-		float : left;
-	
-	}
-	
-	.mainimage{
-		width:100%;
-		
-	}
-	
-</style>
-
-
-<body>
-<a class = "title" href = "#">Main</a><br>
-<a th:if="${log.equals('logout')}" href = "logout">로그아웃</a>
-<a th:unless="${log.equals('logout')}" href = "login">로그인</a>
-<a th:unless="${log.equals('logout')}" href = "member/join.html">회원가입</a>
-<a th:if="${log.equals('logout')}" href = "edit">회원정보 수정</a>
-<a th:if="${log.equals('logout')}" href = "map">랜덤 데이트 코스 검색</a>
-<br>
-	<p th:text="${User}"></p>
-	<p th:if="${log.equals('logout')}">님 환영합니다.</p>
-</body>
-<br><br><hr>
-<img class = "mainimage" src = "http://localhost:8080/images/date_image5.PNG"/>
-</html> -->
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
 <head>
   <th:block th:include="fragments/common/header"></th:block>
 </head>
-<!-- <body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    Navbar
+<!--     Navbar
     <th:block th:include="fragments/common/navbar"></th:block>
 
     Main Sidebar Container
     <th:block th:include="fragments/common/sidebar"></th:block>
-
-    Content Wrapper. Contains page content
+ -->
+<!--     Content Wrapper. Contains page content
     <th:block th:include="fragments/content/main"></th:block>
     /.content-wrapper
+ -->
+<!--     <th:block th:include="fragments/common/footer"></th:block> -->
 
-    <th:block th:include="fragments/common/footer"></th:block>
-
-    Control Sidebar
+<!--     Control Sidebar
     <aside class="control-sidebar control-sidebar-dark">
     Control sidebar content goes here
-    </aside>
+    </aside> -->
     
     </div> -->
  <th:block th:include="fragments/common/footer"></th:block>

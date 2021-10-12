@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.SemiProject.domain.AddressVO;
 import com.example.SemiProject.domain.User;
+import com.example.SemiProject.domain.User_place;
 import com.example.SemiProject.mapper.AddressMapper;
 import com.example.SemiProject.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +34,7 @@ public class UserController {
 	
 	@Autowired
 	UserService userservice;
+	
 	
 	@PostMapping("/join")
 	public String join(User user) {
@@ -161,10 +164,70 @@ public class UserController {
 		 }
 	 }
 	 
+	
+	 @GetMapping("/delete_place")
+	 public ModelAndView delete_place(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception{
+			
+			 HttpSession session = request.getSession(false); 
+			 User loginMember=(User)session.getAttribute(SessionConstants.LOGIN_MEMBER);
+			
+			 
+		 
+		 	request.setCharacterEncoding("utf-8");
+			String id = request.getParameter("place_id");
+			userservice.deleteUserPlace(id);
+			
+			ModelAndView mav = new ModelAndView();
+			 List<User_place> user_places = userservice.getPlace(loginMember.getId());
+			mav.addObject("user_places", user_places);
+			 mav.setViewName("my_place");
+			 mav.addObject("place_id",id);	
+			 mav.addObject("message","가 삭제되었습니다.");
+			
+			return mav;
+			
+		}
 	 
 	 
 	 
 	 
+	 @GetMapping("/add_place")
+	 public ModelAndView add_place(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception{
+		 HttpSession session = request.getSession(false); 
+		 User loginMember=(User)session.getAttribute(SessionConstants.LOGIN_MEMBER);
+		 List<User_place> user_places = userservice.getPlace(loginMember.getId());
+		 ModelAndView mav = new ModelAndView();
+		 
+		 mav.addObject("user_places", user_places);
+		 request.setCharacterEncoding("utf-8");
+		 String id = request.getParameter("place_id");
+		 
+		 mav.setViewName("my_place");
+		 mav.addObject("place_id",id);	
+		 mav.addObject("message","가 등록되었습니다.");
+		 userservice.viewPlace(id);
+		 return mav;
+		}
+	 
+	 
+//	 @GetMapping("/add_place")
+//	 public String add_place(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception{
+//			request.setCharacterEncoding("utf-8");
+//			String id = request.getParameter("place_id");
+//			userservice.viewPlace(id);
+//			model.addAttribute("ABC", id);
+//			model.addAttribute("p","add");
+////			return "/my_place?place_id="+id;
+//			return "redirect:/my_place";
+//		
+//
+//			
+//		}
+//	 
+	
+	 
+	 
+		
 	 
 	 
 	 

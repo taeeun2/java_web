@@ -15,7 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.SemiProject.domain.Date_course;
 import com.example.SemiProject.domain.User;
 import com.example.SemiProject.domain.User_place;
 import com.example.SemiProject.service.DateCourseService;
@@ -47,12 +50,13 @@ public class Date_courseController {
 		} try {
 			request.setCharacterEncoding("utf-8"); 
 			List<User_place> user_places = userservice.getPlace(loginMember.getId());
-			for(User_place user_place : user_places) {
-				System.out.println(user_place.getPlace_id());
-				//model.addAttribute(user_place);
-			}
-			System.out.println(user_places.size());
-			model.addAttribute(user_places);
+			/*
+			 * for(User_place user_place : user_places) {
+			 * System.out.println(user_place.getPlace_id());
+			 * model.addAttribute("user_place", user_place); }
+			 * System.out.println(user_places.size());
+			 */
+			model.addAttribute("user_places", user_places);
 			
 //			if(user_place==null)
 //				System.out.println("null");
@@ -88,6 +92,7 @@ public class Date_courseController {
 		User loginMember =(User)session.getAttribute(SessionConstants.LOGIN_MEMBER);
 		if(loginMember==null) {
 			System.out.println("로그인이 되지 않았습니다.");
+		
 		}
 		try {
 			 request.setCharacterEncoding("utf-8");
@@ -116,6 +121,18 @@ public class Date_courseController {
 			 e.printStackTrace();
 		 }
 	}
+	
+	
+	
+	@GetMapping("/detail_place")
+	public String detail_place(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		String id = request.getParameter("place_id");
+		List<Date_course> date_course_list = dateCourseservice.getDateCourse(id);
+		model.addAttribute("date_course_list", date_course_list);
+		return "detail_place";
+	}
+	
 	
 	
 	

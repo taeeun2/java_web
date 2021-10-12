@@ -15,4 +15,6 @@ public interface UserService {
 	public User_place idCheck2(String id)throws Exception;
 	public void insertUserPlace(Map<String, String> map)throws Exception;
 	public List<User_place> getPlace(String id)throws Exception;
+	public void deleteUserPlace(String id)throws Exception;
+	public void viewPlace(String id)throws Exception;
 }

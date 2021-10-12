@@ -51,4 +51,15 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getPlace(id);
 		
 	}
+	@Override
+	public void deleteUserPlace(String id)throws Exception{
+		userDAO.deleteUserPlace(id);
+	}
+	
+	@Override
+	public void viewPlace(String id)throws Exception{
+		userDAO.viewPlace(id);
+	}
+	
+	
 }

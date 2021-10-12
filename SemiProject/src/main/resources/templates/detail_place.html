@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<script src = "http://code.jquery.com/jquery-latest.min.js"></script>
+<title>Insert title here</title>
+</head>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type = "text/javascript">
+</script>
+<body>
+
+<h1>상세 정보</h1>
+<table border="1"> 
+    <tr>
+    	 <th>번호</th>
+         <th>장소명</th>
+         <th>주소</th>
+         <th>이미지</th>
+         <th>설명</th>
+     </tr>
+     <tr th:each="date_course:${date_course_list}">
+    	 <td th:text="${date_course.sequence}">sequence</td>
+		 <td th:text="${date_course.place_name}">place_id</td>
+		 <td th:text="${date_course.place_address}">total_distance</td>
+         <td th:text="${date_course.img}">total_distance</td>
+         <td th:text="${date_course.comment}">total_distance</td>
+     </tr> 
+</table>
+	
+</body>
+</html>

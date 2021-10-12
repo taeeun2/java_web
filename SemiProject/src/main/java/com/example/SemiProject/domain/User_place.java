@@ -4,6 +4,14 @@ public class User_place {
 	private String place_id;
 	private String user_id;
 	int total_distance; 
+	char viewYn;
+	
+	public char getViewYn() {
+		return viewYn;
+	}
+	public void setViewYn(char viewYn) {
+		this.viewYn = viewYn;
+	}
 	public int getTotal_distance() {
 		return total_distance;
 	}
