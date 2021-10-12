@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<script src = "http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	
+	function fn_process(){
+		var _id = $("#dateCourse_id").val(); 
+		if(_id==''){
+			alert("ID를 입력하세요");
+			return;
+		}
+		
+		$.ajax({
+			type:"post",
+			dataType : "text",
+			async : false,
+			url : "/idCheck2",
+			data : {id:_id},
+			success:function(message){
+				
+				if(message == 'success'){
+					$('#message').text("사용할 수 있는 id입니다.");
+					$('#btn_duplicate').prop("disabled",true);
+					//사용할 수 있는 id일 때는 block하기
+				}else{
+					$('#message').text("사용할 수 없는 id입니다.");
+				}
+			},
+		});
+	}
+	
+	function sendId() {
+		//$("#div_id",opener.document).append("<input type = 'button' value = "+$(dateCourse_id)+")>");
+		$("#id",opener.document).val($("#dateCourse_id").val());
+     	 self.close(); 		
+	}
+</script>
+<title>데이트 코스 ID 지정</title>
+</head>
+<body>
+<div align = "center">
+저장할 데이트 코스의 id를 지정해주세요<br>
+<input type = "text" id = "dateCourse_id"/>
+<input type = "button" id = "btn_duplicate" value = "ID 중복체크하기" onClick = "fn_process()"/><br><br>
+<div id = "message"></div>
+<input type = "button" id = "use" value = "사용하기" onclick = "sendId()"/>
+</div>
+</body>
+</html>

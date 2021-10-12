@@ -38,9 +38,10 @@ public class LoginController {
 		map.put("id", id);
 		map.put("pwd",pwd);
 		
+		
 		try {
 			User findUser = userservice.login(map);
-			if(findUser==null) {
+			if(findUser==null||id.trim()==""||pwd.trim()=="") {
 				model.addAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
 				return "login";
 			}

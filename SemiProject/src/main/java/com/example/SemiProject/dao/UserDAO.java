@@ -1,5 +1,6 @@
 package com.example.SemiProject.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.SemiProject.domain.User;
+import com.example.SemiProject.domain.User_place;
 
 
 public interface UserDAO {
@@ -22,5 +24,14 @@ public interface UserDAO {
 	
 	@Select("select * from semi.user where id=#{id}")
 	public User idCheck(String id)throws Exception;
+	
+	@Select("select * from semi.user_place where place_id=#{id}")
+	public User_place idCheck2(String id)throws Exception;
 
+	@Insert("insert into semi.user_place values(#{place_id},#{user_id},#{total_distance})")
+	public void insertUserPlace(Map<String, String> map) throws Exception;
+
+	@Select("select * from semi.user_place where user_id=#{id}")
+	public List<User_place> getPlace(String id)throws Exception;
+	
 }

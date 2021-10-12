@@ -1,8 +1,0 @@
-/lecture/members/add.do=controller.MemberAddController
-/lecture/members/list.do=controller.MemberListController
-/lecture/members/update.do=controller.MemberUpdateController
-/lecture/members/delete.do=controller.MemberDeleteController
-/lecture/auth/login.do=controller.LogInController
-/lecture/auth/logout.do=controller.LogOutController
-/memberDAO=dao.MemberDAOImpl_ex
-jndi.dataSource=java:comp/env/jdbc/oracle

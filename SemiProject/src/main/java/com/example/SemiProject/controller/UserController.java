@@ -141,5 +141,32 @@ public class UserController {
 			 e.printStackTrace();
 		 }
 	 }
+	 
+	 @PostMapping("/idCheck2")
+	 public void idCheck2(HttpServletRequest request, HttpServletResponse response, User user) {
+		 //User loginMember =(User)session.getAttribute(SessionConstants.LOGIN_MEMBER);
+		 try {
+			 request.setCharacterEncoding("utf-8");
+			 response.setContentType("text/html; charset=utf-8");
+			 
+			 PrintWriter out = response.getWriter();
+			 String id = (String) request.getParameter("id");
+			 if(userservice.idCheck2(id)!=null)
+				 out.print("fail");
+			 else
+				 out.print("success");
+			 
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	
 }

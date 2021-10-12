@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>주소로 장소 표시하기</title>
+    <title>랜덤 데이트 코스</title>
     
     
 <style>
@@ -65,52 +65,89 @@ var cartegory=[];
 //거리 계산
 var distanceOverlay;
 
-//장소이름 저장
+//장소,이름, 주소, 순서 저장
 var names = [];
-
+var address = [];
 var count = 0;
 
-//카테고리 저장(순서 출력을 위해)
-var seq = [];
+//db에 이름, 주소 저장(2차원 배열로 만들기)
+var dbNames = [];
+var dbAddress = [];
 
+//카테고리 순서 저장(카테고리 순서 출력을 위해)
+var carNum = 1;
+var seq = "";
 //장소 총 거리 저장
 var total_distances = [];
+//체크박스 아이디 저장
+var check_id = [];
+//체크 여부
+var check_ox = false;
 
 $(document).ready(function(){
     $("#restaurant").change(function(){
         if($("#restaurant").is(":checked")){
-        	seq.push("음식점");
+        	seq += carNum+". 음식점";
+        	$('#order').val(seq);
+        	carNum++;
+        	check_id.push("#restaurant");
         	ps.categorySearch('FD6', placesSearchCB, {useMapBounds:true}); 
+        	
+        	
         }
     });
     $("#cafe").change(function(){
         if($("#cafe").is(":checked")){
-        	seq.push("카페");
+        	seq += carNum+". 카페";
+        	$('#order').val(seq);
+        	carNum++;
+        	check_id.push("#cafe");
         	ps.categorySearch('CE7', placesSearchCB, {useMapBounds:true}); 
+        	
         }
     });
     $("#culture").change(function(){
         if($("#culture").is(":checked")){
-        	seq.push("문화시설");
+        	
+        	seq += carNum+". 문화시설";
+        	$('#order').val(seq);
+        	carNum++;
+        	check_id.push("#culture");
+        	
         	ps.categorySearch('CT1', placesSearchCB, {useMapBounds:true}); 
+        
         }
     });
     $("#tourism").change(function(){
         if($("#tourism").is(":checked")){
-        	seq.push("관광명소");
+        	seq += carNum+". 관광명소";
+        	$('#order').val(seq);
+        	carNum++;
+        	check_id.push("#tourism");
+        	
         	ps.categorySearch('AT4', placesSearchCB, {useMapBounds:true}); 
+        	
         }
     });
     $("#lodgment").change(function(){
         if($("#lodgment").is(":checked")){
-        	seq.push("숙박");
+        	seq += carNum+". 숙박";
+        	$('#order').val(seq);
+        	carNum++;
+        	check_id.push("#lodgment");
         	ps.categorySearch('AD5', placesSearchCB, {useMapBounds:true}); 
+        	
         }
     });
     $("#mart").change(function(){
         if($("#mart").is(":checked")){
-        	seq.push("대형마트");
+        	seq += carNum+". 대형마트";
+        	$('#order').val(seq);
+        	carNum++;
+        	check_id.push("#mart");
+        	
         	ps.categorySearch('MT1', placesSearchCB, {useMapBounds:true}); 
+        	
         }
     });
     
@@ -120,9 +157,6 @@ $(document).ready(function(){
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-        /* for (var i=0; i<data.length; i++) {
-            displayMarker(data[i]);    
-        } */
         //랜덤 장소 보여줌
         displayMarker(data[Math.floor(Math.random()*data.length)]);
     }
@@ -165,6 +199,9 @@ function displayMarker(place) {
     markers.push(marker); 
     //장소 이름 배열에 추가
     names.push(place.place_name);
+    address.push(place.road_address_name);
+    
+    
     
     //장소 클릭 시 장소 명 나오게
     infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name+'</div>');
@@ -282,18 +319,11 @@ function distance(){
    	for(var i=0;i<markers.length;i++){
    		latlng[i]=markers[i].getPosition();
    	}
-  
-   	
-   	
-  //  var distance = Math.sqrt(Math.pow(Math.abs(latlng[0].getLat()-latlng[1].getLat()),2)+Math.pow(Math.abs(latlng[0].getLng()-latlng[1].getLng()),2));
-    //미터로 거리 환산
-    //distance = distance * 60 * 1.1515 * 1609.344;
-    
+ 
    
-    
+    //경도, 위도로 지점 사이 거리 계산, m로 단위 변환
     for(var i=0;i<markers.length-1;i++){
     	distance += Math.sqrt(Math.pow(Math.abs(latlng[i].getLat()-latlng[i+1].getLat()),2)+Math.pow(Math.abs(latlng[i].getLng()-latlng[i+1].getLng()),2))* 60 * 1.1515 * 1609.344;
-    	//alert(distance);
     }
     
 	
@@ -317,20 +347,7 @@ function distance(){
     
     //지도에 선 표시
     polyline.setMap(map);
-    //alert(distance1); 
 }
-
-function returnDistance(x1,x2,y1,y2){
-	var rd = parseFloat(Math.sqrt(Math.pow(Math.abs(x1-x2),2))+parseFloat(Math.pow(Math.abs(y1-y2),2)));
-	alert(rd);
-	//미터로 거리 환산
-	rd = rd * 60 * 1.1515 * 1609.344;
-	alert(rd);
-	return  rd;
-}
-
-
-
 
 
 
@@ -356,11 +373,25 @@ function showDistance(content, position) {
     }
 }
 
+
+
 function randomDate(){
+	
+	
+
+	//마커 보여주기
 	showMarkers();
+	//거리 계산해서 보여주기
 	distance(); 
 	
+	//db에 저장할 내용 배열에 넣기
+	dbNames.push(names);
+	dbAddress.push(address);
+	
+	
+	
 	str ='<tr>';
+	str+='<td>'+count+'</td>';
 	str+='<td>';
 	for(var i=0;i<names.length;i++){
 		if(i!=names.length-1)
@@ -368,30 +399,68 @@ function randomDate(){
 		else
 			str+=names[i];
 	}
-	str+='</td><td>'+ Math.round(total_distances[count++])+'m</td>'
-	str+='<td><input type = "button" onclick="input('+count+')" value="담기"/></td></tr>';
+	str+='</td><td>'+ Math.round(total_distances[count])+'m</td>'
+	str+='<td><input type = "button" onclick="input('+(count++)+')" value="담기"/></td></tr>';
 	//str+='</td><td>'+distance+'</td>';
 	$('#course').append(str);
 	//체크박스 초기화하기
 	$(':checkbox:checked').prop('checked',false);
-	//마커 초기화하기
-	
-	//순서 입력
+
+	/* //순서 입력
 	var sequences="";
 	for(var i=0;i<seq.length;i++){
 		sequences+=(i+1)+"."+seq[i]+" ";
-	}
+	} */
 	
-	$('#order').val(sequences);
+	//$('#order').val(sequences);
 	
 	//초기화
 	seq=[];
 	markers=[];
 	names = [];
+	carNum=1;
+	seq = "";
 }
 
+var saveNum = 0;
+var id = "";
+
+//담기 버튼 눌렀을 때 db에 저장
 function input(count){
-	alert(count);
+	
+	var url = "http://localhost:8080/place/dateCourseID.html";
+	window.open(url,"pop","width=500,height=300");
+	
+	saveNum = count;
+	
+	
+	//alert(Math.round(total_distances[count]));
+	//데이터 넘겨서 db에 저장하기
+	
+	/* for(var i=0;i<dbNames[count].length;i++)
+		alert(dbNames[count][i]);
+	
+	for(var i=0;i<dbAddress[count].length;i++)
+		alert(dbAddress[count][i]); */
+}
+
+
+function save(){
+	var _place_id = $("#id").val();
+	var _total_distance = Math.round(total_distances[saveNum]);
+	var _place_name = dbNames[saveNum];
+	var _place_address = dbAddress[saveNum];
+	$.ajax({
+		traditional : true,
+		type:"post",
+		async : false,
+		url : "/save",
+		data : {place_id:_place_id,total_distance:_total_distance,place_name:_place_name,place_address:_place_address},
+		success:function(message){
+			alert('데이트 코스가 성공적으로 저장되었습니다.');
+		},
+	});
+	
 }
 
 
@@ -466,7 +535,7 @@ function erase(){
 	   <input type = "checkbox" id = "tourism"/>관광명소
 	   <input type = "checkbox" id = "lodgment"/>숙박
 	   <input type = "checkbox" id = "mart"/>대형마트
-	   <br>원하는 순서대로 카테고리를 선택하세요<br>
+	   <br>원하는 순서대로 카테고리를 선택하세요(체크박스를 해제하셨다가 다시 누르면 중복 선택이 가능합니다.)<br>
  <input style="text-align:center; width:300px" type = "text" id = "order" value = "순서"/>
  <input type = "button" value = "랜덤 데이트코스" onclick = "randomDate()"/><br>
  <input type = "button" value = "주변 주차장 보기" onclick = "park()"/>
@@ -476,13 +545,15 @@ function erase(){
  <input type = "button" value = "지우기" onclick = "erase()"/>
 <table id = "course">
 	<tr>
+		<th>번호</th>
 		<th>데이트 코스</th>
 		<th>총 거리</th>
 		<th>담기</th>
 	</tr>
 </table>
-
-
+<!-- id값을 받아온다. -->
+저장할 데이트 코스 아이디 : <input type = "button" id = "id" value = "저장할 데이트 코스 아이디" onclick="save()"/>
+<a href = "http://localhost:8080/my_place">종료</a>
 </form>
 </body>
 </html>

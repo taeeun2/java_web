@@ -1,0 +1,46 @@
+<!-- <!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<head>
+  <th:block th:include="fragments/common/header"></th:block>
+</head>
+<div>
+<h2>My_place</h2>
+<p th:each = "data:${user_place}" th:text="${data.place_id}"></p>
+</div>
+ <th:block th:include="fragments/common/footer"></th:block>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<head>
+</head>
+<div>
+<h2>My_place</h2>
+<!-- <p th:each = "data:${user_place}" th:text="${data.place_id} +','+${data.total_distance}"></p> -->
+<p th:each = "data:${user_place}" th:text="${data.place_id} +','+${data.total_distance}"></p>
+<!-- 
+	<ul>
+		<li th:each="data:${user_place}" th:text="${data}"></li>
+		<li th:each="data: ${user_place}" th:text="${data.place_id}+','+${data.total_distance}"><li>
+	</ul> -->
+	
+<table> 
+    <tr>
+         <th>아이디</th>
+         <th>총 거리</th>
+     </tr>
+     <tr th:each="places : ${user_places}">
+         <td>[[${places.place_id}]]</td>
+         <td>[[${places.total_distance]]</td>    
+       <!--   <td th:text="${p.total_distance}">total_distance</td> -->
+     </tr>
+</table><!-- 
+	<p th:each="data:${user_place}" th:text ="${data.place_id}">
+</p> -->
+</div> 
+</body>
+</html>

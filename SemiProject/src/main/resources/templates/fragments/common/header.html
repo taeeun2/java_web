@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+
+	*{
+		/* font-family:sans-serif; */
+		font-family: 'Yeon Sung', cursive; 
+	}
+	.title{
+		font-size : 35px;
+	    float: right;
+    	position: relative;
+   		left: -47%;
+   		margin-top : 20px;
+   		
+	}
+	*{
+		text-decoration: none;
+		color : black;
+	}
+	
+	
+	a{
+		font-size : 15px;
+		margin : 5px;
+		float : right;
+	
+	}
+	
+	p{
+		font-size : 20px;
+		margin : 5px;
+		float : left;
+	
+	}
+	
+	.mainimage{
+		width:100%;
+		
+	}
+	
+</style>
+
+
+<body>
+<a class = "title" href = "#">Main</a><br>
+<a th:if="${log.equals('logout')}" href = "logout">로그아웃</a>
+<a th:unless="${log.equals('logout')}" href = "login">로그인</a>
+<a th:unless="${log.equals('logout')}" href = "member/join.html">회원가입</a>
+<a th:if="${log.equals('logout')}" href = "edit">회원정보 수정</a>
+<a th:if="${log.equals('logout')}" href = "map">랜덤 데이트 코스 검색</a>
+<a th:if="${log.equals('logout')}" href = "my_place">나의 데이트 코스</a>
+<br>
+	<p th:text="${User}"></p>
+	<p th:if="${log.equals('logout')}">님 환영합니다.</p>
+</body>
+<br><br><hr>
+</html>
