@@ -15,8 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.SemiProject.domain.Date_course;
 import com.example.SemiProject.domain.User;
@@ -130,11 +129,28 @@ public class Date_courseController {
 		String id = request.getParameter("place_id");
 		List<Date_course> date_course_list = dateCourseservice.getDateCourse(id);
 		model.addAttribute("date_course_list", date_course_list);
+		model.addAttribute("place_id", id);
 		return "detail_place";
 	}
 	
 	
+	@GetMapping("/update_date_course")
+	public ModelAndView update_date_course(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception{
+		
+		request.setCharacterEncoding("utf-8");
+		int num = Integer.parseInt(request.getParameter("num"));	
+		Date_course date_course = dateCourseservice.getOneDateCourse(num);
+		
+		String place_id = request.getParameter("place_id");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(date_course);
+		//mav.addObject(place_id);
+		mav.setViewName("update_date_course");
+		return mav;
+	}
 	
+
 	
 	
 	

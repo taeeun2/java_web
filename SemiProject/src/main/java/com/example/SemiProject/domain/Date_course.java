@@ -7,6 +7,14 @@ public class Date_course {
 	private int sequence;
 	private String img;
 	private String comment;
+	private int num;
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getUser_place_id() {
 		return user_place_id;
 	}

@@ -1,15 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 <meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-<div align="center">
-<h1>회원정보 수정</h1>
-<form action = "edit" method = "POST">
+<style>
 
-	아이디 : <input type="text" name = "id" th:value="${id}" readonly/><br>
+
+	*{
+		/* font-family:sans-serif; */
+		font-family: 'Yeon Sung', cursive; 
+	}
+	.title{
+		font-size : 35px;
+	    float: right;
+    	position: relative;
+   		left: -47%;
+   		margin-top : 20px;
+   		
+	}
+	*{
+		text-decoration: none;
+		color : black;
+	}
+	
+	
+	a{
+		font-size : 15px;
+		margin : 5px;
+		float : right;
+	
+	}
+	
+	p{
+		font-size : 20px;
+		margin : 5px;
+		float : left;
+	
+	}
+	
+	.mainimage{
+		width:100%;
+		
+	}
+	
+
+	.editForm{
+	  position:absolute;
+	  width:300px;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+	  top:50%;
+	  left:50%;
+	  transform: translate(-50%,-50%);
+	  border-radius: 15px;
+	
+	}
+	
+
+</style>
+<a class = "title" href = "/">랜데코</a><br><br><br><br>
+<hr>
+<!-- <a th:if="${log.equals('logout')}" href = "logout">로그아웃</a>
+<a th:unless="${log.equals('logout')}" href = "login">로그인</a>
+<a th:unless="${log.equals('logout')}" href = "member/join.html">회원가입</a>
+<a th:if="${log.equals('logout')}" href = "edit">회원정보 수정</a>
+<a th:if="${log.equals('logout')}" href = "map">랜덤 데이트 코스 검색</a>
+<a th:if="${log.equals('logout')}" href = "my_place">나의 데이트 코스</a> -->
+<body>
+
+<div align="center">
+
+<form action = "edit" method = "POST" class = "editForm">
+<h2>회원정보 수정</h2><br>
+	아이디 : <input type="text" name = "id" th:value="${id}" disabled="disabled" readonly/><br>
 	이메일 : <input type = "text" name ="email" th:value="${email}"/><br>
 	비밀번호 : <input type = "text" name ="pwd" th:value="${pwd}"/><br>
 	이름 : <input type = "text" name ="name" th:value="${name}"/><br>

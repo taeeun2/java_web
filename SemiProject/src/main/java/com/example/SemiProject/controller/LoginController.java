@@ -1,6 +1,7 @@
 package com.example.SemiProject.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.SemiProject.domain.User;
+import com.example.SemiProject.domain.User_place;
 import com.example.SemiProject.service.UserService;
 
 @MapperScan(basePackages = "com.example.SemiProject")
@@ -45,6 +47,10 @@ public class LoginController {
 				model.addAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
 				return "login";
 			}
+			List<User_place> user_place_list = userservice.main_place();
+			if(user_place_list!=null)
+				model.addAttribute("user_place_list",user_place_list);
+			
 			model.addAttribute("log","logout");
 			model.addAttribute("message", "로그인되었습니다.");
 			HttpSession session = request.getSession();//세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성하여 반환

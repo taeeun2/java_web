@@ -17,4 +17,5 @@ public interface UserService {
 	public List<User_place> getPlace(String id)throws Exception;
 	public void deleteUserPlace(String id)throws Exception;
 	public void viewPlace(String id)throws Exception;
+	public List<User_place> main_place()throws Exception;
 }

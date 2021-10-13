@@ -2,10 +2,73 @@
 <!DOCTYPE html>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 <meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
 <title>my_place</title>
 </head>
+<style>
+
+
+	*{
+		/* font-family:sans-serif; */
+		font-family: 'Yeon Sung', cursive; 
+	}
+	.title{
+		font-size : 35px;
+	    float: right;
+    	position: relative;
+   		left: -47%;
+   		margin-top : 20px;
+   		
+	}
+	*{
+		text-decoration: none;
+		color : black;
+	}
+	
+	table{
+	  position:absolute;
+	  text-align : center;
+	  border-collapse: collapse;
+	  line-height: 1.5;
+	
+	}
+	th {
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  color: #369;
+	  border-bottom: 3px solid #036;
+	}
+	th {
+	  width: 150px;
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	  background: #f3f6f7;
+	}
+	td {
+	  width: 350px;
+	  padding: 10px;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	}
+	
+	h2{
+		text-align : center;
+	}
+	
+
+</style>
+
 <div>
+
+<a class = "title" href = "/">랜데코</a><br><br><br><br><hr>
+
+
 <h2>My_place</h2>
 <p th:each = "data:${user_place}" th:text="${data.place_id} +','+${data.total_distance}"></p>
 <table border="1"> 
@@ -23,8 +86,11 @@
          <td><a th:href="@{/add_place(place_id=${places.place_id})}">등록</a></td>
          <td><a th:href="@{/delete_place(place_id=${places.place_id})}">삭제</a></td>
      </tr> 
+     <tr th:if="${place_id!=null}" th:text="|${place_id} ${message}|">
+     </tr>
 </table>
-<span th:if="${place_id!=null}" th:text="|${place_id} ${message}|"></span><!-- 
+
+<!-- 
 <p th:text="${place_id}"><p th:text="${message}"></p> -->
 	<!--  <p th:unless="${p.equals('add')}"></p>
  -->
@@ -33,7 +99,7 @@
 	       <strong th:text="|*{place_id}|"></strong> ---
 	       </li> -->
 
-<input type = "button" value = "수정"/>
+
 </div> 
 
 </body>

@@ -4,8 +4,15 @@
 <head>
   <th:block th:include="fragments/common/header"></th:block>
 </head>
+<style>
+	.main{
+		width : 100%;
+	}
+
+</style>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
+
 
 <!--     Navbar
     <th:block th:include="fragments/common/navbar"></th:block>
@@ -13,9 +20,9 @@
     Main Sidebar Container
     <th:block th:include="fragments/common/sidebar"></th:block>
  -->
-<!--     Content Wrapper. Contains page content
-    <th:block th:include="fragments/content/main"></th:block>
-    /.content-wrapper
+<!--     Content Wrapper. Contains page content-->
+    
+    <!--  /.content-wrapper
  -->
 <!--     <th:block th:include="fragments/common/footer"></th:block> -->
 
@@ -24,7 +31,10 @@
     Control sidebar content goes here
     </aside> -->
     
-    </div> -->
+    </div>
+  <img src = "http://localhost:8080/images/main_final.png" alt = "main" class = "main"/>
+ <th:block th:include="fragments/content/main"></th:block>
+  
  <th:block th:include="fragments/common/footer"></th:block>
 </html>
 

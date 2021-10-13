@@ -1,18 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 <meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
 <script src = "http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
+<style>
+		img{
+			width: 100px;
+			heigth : 100px;
+			
+		}
+
+	*{
+		/* font-family:sans-serif; */
+		font-family: 'Yeon Sung', cursive; 
+	}
+	.title{
+		font-size : 35px;
+	    float: right;
+    	position: relative;
+   		left: -47%;
+   		margin-top : 20px;
+   		
+	}
+	*{
+		text-decoration: none;
+		color : black;
+	}
+	
+	table{
+	  position:absolute;
+	  text-align : center;
+	  border-collapse: collapse;
+	  line-height: 1.5;
+	
+	}
+	th {
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  color: #369;
+	  border-bottom: 3px solid #036;
+	  width: 150px;
+	  padding: 10px;
+	  font-weight: bold;
+	  background: #f3f6f7;
+	}
+	
+	td {
+	  width: 350px;
+	  padding: 10px;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	}
+	
+	h2{
+		text-align : center;
+	}
+
+
+</style>
+	
+
 </head>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type = "text/javascript">
-</script>
 <body>
-
-<h1>상세 정보</h1>
+<a class = "title" href = "/">랜데코</a><br><br><br><br><hr>
+<h2>상세 정보</h2>
 <table border="1"> 
     <tr>
     	 <th>번호</th>
@@ -20,15 +77,19 @@
          <th>주소</th>
          <th>이미지</th>
          <th>설명</th>
+         <th>수정</th>
      </tr>
      <tr th:each="date_course:${date_course_list}">
     	 <td th:text="${date_course.sequence}">sequence</td>
 		 <td th:text="${date_course.place_name}">place_id</td>
 		 <td th:text="${date_course.place_address}">total_distance</td>
-         <td th:text="${date_course.img}">total_distance</td>
-         <td th:text="${date_course.comment}">total_distance</td>
+        <!--  <td th:text="${date_course.img}">total_distance</td> -->
+         <td><img th:src="@{http://localhost:8080/images/}+${date_course.img}"></td>
+         <!-- <td><a th:href="@{http://localhost:8080/}+${date_course.img}">이미지</td> -->
+         <td th:text="${date_course.comment}">place_comment</td>
+     	 <td><a th:href="@{/update_date_course(num=${date_course.num})}">수정</a></td> 
      </tr> 
 </table>
-	
+	<p th:text="${place_id}"></p>
 </body>
 </html>

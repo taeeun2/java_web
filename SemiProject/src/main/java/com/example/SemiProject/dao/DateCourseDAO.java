@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.SemiProject.domain.Date_course;
 
@@ -15,5 +16,12 @@ public interface DateCourseDAO {
 	@Select("select * from semi.date_course where user_place_id = #{place_id}")
 	public List<Date_course> getDateCourse(String id);
 	
+	@Select("select * from semi.date_course where num = #{num}")
+	public Date_course getOneDateCourse(int num);
+	
+	@Update("update semi.date_course set comment = #{comment}, img = #{img} where num = #{num}")
+	public void updateDateCourse(String comment, String img, int num);
 
+	
+	
 }

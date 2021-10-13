@@ -61,5 +61,10 @@ public class UserServiceImpl implements UserService{
 		userDAO.viewPlace(id);
 	}
 	
+	@Override
+	public List<User_place> main_place()throws Exception{
+		return userDAO.main_place();
+	}
+	
 	
 }

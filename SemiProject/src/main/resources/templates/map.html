@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <title>랜덤 데이트 코스</title>
     
@@ -17,7 +20,20 @@
 .distanceInfo .label {display:inline-block;width:50px;}
 .distanceInfo:after {content:none;} 
 
-
+ *{
+		/* font-family:sans-serif; */
+		font-family: 'Yeon Sung', cursive; 
+		text-decoration: none;
+		color : black;
+	}
+ a{
+		font-size : 15px;
+		margin : 5px;
+		color : red;
+	
+	}
+	
+	
 
 table{
 	width : 100%;
@@ -33,11 +49,26 @@ th{
 		background-color : ivory;
 	}
 	
+	.input_form{
+	
+	  
+	  width:100%;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+
+
+	  border-radius: 15px;
+	
+	
+	}
+	
 	
 </style>
 </head>
 <body>
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map" style="width:100%;height:500px;"></div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9ba249be129f7da17d00610164a79f2&libraries=services"></script>
 <script>
@@ -526,7 +557,7 @@ function erase(){
 }
 
 </script>
-<form >
+<br><br><form class = "input_form">
 지역명 : <input type = "text" id = "place" name = "place"/>
 <input type = "button" onclick="findSearch()" value="검색"/><br>
 키워드 : <input type ="checkbox" id = "restaurant"/>음식점
@@ -553,6 +584,7 @@ function erase(){
 </table>
 <!-- id값을 받아온다. -->
 저장할 데이트 코스 아이디 : <input type = "button" id = "id" value = "저장할 데이트 코스 아이디" onclick="save()"/>
+<a href = "/">종료</a><br>
 </form>
 </body>
 </html>

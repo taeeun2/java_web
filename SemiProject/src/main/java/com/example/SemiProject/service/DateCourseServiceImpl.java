@@ -24,5 +24,14 @@ public class DateCourseServiceImpl implements DateCourseService{
 	public List<Date_course> getDateCourse(String id)throws Exception{
 		return dateCourseDAO.getDateCourse(id);
 	}
+	
+	@Override
+	public Date_course getOneDateCourse(int num)throws Exception{
+		return dateCourseDAO.getOneDateCourse(num);
+	}
 
+	@Override
+	public void updateDateCourse(String comment, String img, int num)throws Exception{
+		dateCourseDAO.updateDateCourse(comment, img, num);
+	}
 }

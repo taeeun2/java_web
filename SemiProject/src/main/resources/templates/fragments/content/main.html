@@ -1,10 +1,97 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<title></title>
 </head>
+
+<style>
+	table{
+	  border-collapse: collapse;
+	  line-height: 1.5;
+	}
+	th {
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  color: #369;
+	  border-bottom: 3px solid #036;
+	  width: 150px;
+	  padding: 10px;
+	  font-weight: bold;
+	  background: #f3f6f7;
+	}
+	
+	td{
+		text-align: center;
+		font-family: 'Yeon Sung', cursive;
+	}
+	
+	
+	
+	.mainimage{
+		width : 100%;
+	}
+	
+	
+	p{
+		text-align : center;
+	}
+</style>
 <body>
+<br><br>
+<p>추천 코스</p>
+<div style = "background-color : whitesmoke">
+	<br>
+	
+	
+	<table border="1"> 
+    <tr>
+         <th>아이디</th>
+         <th>총 거리(m)</th>
+         <th>상세 정보</th>
+     </tr>
+     <tr th:each="places:${user_place_list}">
+		 <td th:text="${places.place_id}">place_id</td>
+         <td th:text="${places.total_distance}">total_distance</td>
+         <td><a th:href="@{/detail_place(place_id=${places.place_id})}">보기</a></td>
+     </tr> 
+</table>
+	
+	
+	
+<!-- 	<div th:each="num : ${#numbers.sequence(1,3)}">
+		<p th:text="${'index : ' + numStat.index}"></p>
+		<p th:text="${'count : ' + numStat.count}"></p>
+		<p th:text="${'size : ' + numStat.size}"></p>
+		<p th:text="${'current : ' + numStat.current}"></p>
+		<p th:text="${'even : ' + numStat.even}"></p>
+		<p th:text="${'odd : ' + numStat.odd}"></p>
+		<p th:text="${'first : ' + numStat.first}"></p>
+		<p th:text="${'last : ' + numStat.last}"></p>
+	</div> -->
+	
+	
+	 
+<!-- 	<table border="1" th:each = "user_place :${user_place_list}"> 
+    <tr>
+         <th>장소명</th>
+         <th>주소</th>
+         <th>이미지</th>
+         <th>설명</th>
+     </tr>
+     <tr th:each="date_course:${user_place}">
+		 <td th:text="${date_course.place_name}">place_id</td>
+		 <td th:text="${date_course.place_address}">total_distance</td>
+         <td th:text="${date_course.img}">total_distance</td>
+         <td th:text="${date_course.comment}">total_distance</td>
+     </tr> 
+	</table> -->
+</div>	
 
 </body>
+
 </html>

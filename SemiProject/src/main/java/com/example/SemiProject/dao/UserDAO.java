@@ -42,5 +42,6 @@ public interface UserDAO {
 	@Update("update semi.user_place set viewYn = 'y' where place_id = #{id}")
 	public void viewPlace(String id)throws Exception;
 	
-	
+	@Select("select * from semi.user_place where viewYn='y'")
+	public List<User_place> main_place() throws Exception;
 }
