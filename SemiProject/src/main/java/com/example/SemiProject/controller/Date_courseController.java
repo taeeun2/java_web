@@ -91,7 +91,7 @@ public class Date_courseController {
 		User loginMember =(User)session.getAttribute(SessionConstants.LOGIN_MEMBER);
 		if(loginMember==null) {
 			System.out.println("로그인이 되지 않았습니다.");
-		
+			
 		}
 		try {
 			 request.setCharacterEncoding("utf-8");
@@ -121,6 +121,61 @@ public class Date_courseController {
 		 }
 	}
 	
+
+	 @GetMapping("/save_main")
+	public String save_main(HttpServletRequest request, HttpServletResponse response){
+		
+		try {
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession(false); 
+		User loginMember =(User)session.getAttribute(SessionConstants.LOGIN_MEMBER);
+		if(loginMember==null) {
+			out.print("로그인되지 않았습니다.");
+			return "redirect:/";
+		}
+		
+			 request.setCharacterEncoding("utf-8");
+			 response.setContentType("text/html; charset=utf-8");
+	
+			 String place_id = request.getParameter("place_id");
+
+			
+			 
+			 Map<String, String> map = new HashMap<>();
+			 map.put("place_id", place_id+"("+loginMember.getId()+")");
+			 String total_distance = userservice.getDistance(place_id);
+			 
+			 map.put("total_distance", total_distance);
+			 map.put("user_id", loginMember.getId());
+			 userservice.insertUserPlace(map);
+			 
+
+			 List<Date_course> date_course_list = dateCourseservice.getDateCourse(place_id);
+			 String user_place_id = place_id+"("+loginMember.getId()+")";
+			 for(Date_course date_course : date_course_list) {
+				 String place_name = date_course.getPlace_name();
+				 String place_address = date_course.getPlace_address();
+				 String img = date_course.getImg();
+				 String comment=date_course.getComment();
+				 int sequence = date_course.getSequence();
+				 
+				 dateCourseservice.insertMainDateCourse(user_place_id,place_name,place_address,img,comment,sequence);
+				 
+			 }
+			
+			
+					
+			 return "redirect:/";
+			 
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+			
+			 
+		
+	}
+	
 	
 	
 	@GetMapping("/detail_place")
@@ -132,6 +187,18 @@ public class Date_courseController {
 		model.addAttribute("place_id", id);
 		return "detail_place";
 	}
+	
+	//메인 화면에서 데이트 코스 정보 볼때(수정 버튼 없앰)
+	@GetMapping("/detail_place_main")
+	public String detail_place_main(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		String id = request.getParameter("place_id");
+		List<Date_course> date_course_list = dateCourseservice.getDateCourse(id);
+		model.addAttribute("date_course_list", date_course_list);
+		model.addAttribute("place_id", id);
+		return "detail_place_main";
+	}
+	
 	
 	
 	@GetMapping("/update_date_course")

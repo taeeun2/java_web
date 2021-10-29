@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <!--타임리프 설정-->
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<style>
+.pro_img{
+		width : 200px;
+		height : 200px;
+	}
+	tr { display: block; float: left; }
+	th, td { display: block; padding: 10px;
+			text-align : center; }
+
+</style>
+<body>
+<th:block th:include="fragments/common/header"></th:block>
+<nav>
+<th:block th:include="fragments/common/nav"></th:block>
+</nav>
+<br>
+<table>
+	<tr th:each = "product_view : ${product_view_list}">
+	<td><a th:href = "@{/view_detail_product(pseq=${product_view.pseq})}">
+	<img class = "pro_img" th:src="@{http://localhost:8000/product_images/}+${product_view.image}"></a>
+	<td th:text = "${product_view.name}"></td> 
+	<td th:text = "${product_view.price2}"></td>
+	</tr>
+</table>
+<th:block th:include="fragments/common/footer"></th:block>
+</body>
+</html>

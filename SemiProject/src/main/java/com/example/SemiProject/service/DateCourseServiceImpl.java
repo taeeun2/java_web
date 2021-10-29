@@ -1,6 +1,7 @@
 package com.example.SemiProject.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -33,5 +34,10 @@ public class DateCourseServiceImpl implements DateCourseService{
 	@Override
 	public void updateDateCourse(String comment, String img, int num)throws Exception{
 		dateCourseDAO.updateDateCourse(comment, img, num);
+	}
+	
+	@Override
+	public void insertMainDateCourse(String user_place_id,String place_name,String place_address,String img,String comment,int sequence)throws Exception{
+		dateCourseDAO.insertMainDateCourse(user_place_id,place_name,place_address,img,comment,sequence);
 	}
 }

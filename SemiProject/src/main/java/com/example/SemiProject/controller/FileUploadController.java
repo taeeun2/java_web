@@ -52,7 +52,6 @@ public class FileUploadController {
 		multipartRequest.setCharacterEncoding("utf-8");
 		//Enumeration eun = multipartRequest.getParameterNames();
 		int num = date_course.getNum();
-		System.out.println(num);
 		String comment = date_course.getComment();
 		
 		
@@ -71,6 +70,16 @@ public class FileUploadController {
 		dateCourseService.updateDateCourse(comment,img, num);
 		
 		return "redirect:/";
+		
+		
+//		Date_course date_course2 = dateCourseService.getOneDateCourse(num);
+//		ModelAndView mav = new ModelAndView();
+//		List<Date_course> date_course_list = dateCourseService.getDateCourse(date_course2.getUser_place_id());
+//		mav.addObject(date_course_list);
+//		mav.setViewName("detail_place");
+//		return mav;
+//		
+		
 		
 //		ModelAndView mav = new ModelAndView();
 //		HttpSession session = request.getSession(false); 

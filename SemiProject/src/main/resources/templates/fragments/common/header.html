@@ -34,7 +34,7 @@
 	
 	}
 	
-	p{
+	.user{
 		font-size : 20px;
 		margin : 5px;
 		float : left;
@@ -44,6 +44,9 @@
 	.mainimage{
 		width:100%;
 		
+	}
+	.footer{
+		font-size :15px;
 	}
 	
 </style>
@@ -58,8 +61,8 @@
 <a th:if="${log.equals('logout')}" href = "map">랜덤 데이트 코스 검색</a>
 <a th:if="${log.equals('logout')}" href = "my_place">나의 데이트 코스</a>
 <br>
-	<p th:text="${User}"></p>
-	<p th:if="${log.equals('logout')}">님 환영합니다.</p>
+	<p th:text="${User}" class = "user"></p>
+	<p th:if="${log.equals('logout')}" class = "user">님 환영합니다.</p>
 </body>
 <br><br><hr>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <!--타임리프 설정-->
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+	a{
+	 font-family: 'Song Myung', serif;
+	 font-size:17px;
+	}
+
+	li{
+	
+	list-style:none;/*  점 제거 */
+	margin-top : 30px;
+	text-align:center;
+	}
+	
+	
+	nav{
+	float:left;
+	margin-right :20px;
+	background: #fffaf2;
+	padding : 10px;
+	}
+</style>
+<body>
+ <div id="wrap">
+<nav id="nav">
+            <ul>
+              <li class="logoli">
+                 <li><a href = "/view?kind=1" >Heels</a> </li>
+				 <li><a href = "/view?kind=2" >Boots</a> </li>
+				 <li><a href = "/view?kind=3" >Sandals</a> </li>
+				 <li><a href = "/view?kind=4" >Sneakers</a> </li>
+				 <li><a href = "/view?kind=5" >On Sale</a> </li>
+            </ul>
+
+    </nav>
+    </div>
+</body>
+</html>

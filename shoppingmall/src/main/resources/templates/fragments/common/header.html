@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <!--타임리프 설정-->
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8">
+<title>Insert title here</title>
+<style>
+.title{
+		font-size : 35px;
+	    float: right;
+    	position: relative;
+   		left: -47%;
+   		margin-top : 20px;
+   		
+	}
+	*{
+		font-family: 'Song Myung', serif; 
+		text-decoration: none;
+ 		color : black;
+	}
+	.a1{
+		
+		font-size : 12px;
+		margin : 5px;
+		
+	}
+	
+	.a2{
+		font-size : 20px;
+		margin : 15px;
+	    
+	}
+</style>
+</head>
+<body>
+<div>
+		<a class = "title" href = "/" >쇼핑몰</a>
+</div>
+<div style = "height:80px;">
+
+
+		<span style="float:right;">
+		<span th:text="${Member}" class = "user"></span>
+		<span th:if="${log.equals('login')}" class = "user">님 환영합니다.</span>
+		<a th:unless="${log.equals('login')}" class = "a1" href = "login" >LOGIN(CUSTOMER | ADMIN)</a>
+		<a th:if="${log.equals('login')}" class = "a1" href = "logout" >LOGOUT</a>
+		<a th:unless="${log.equals('login')}" class = "a1" href = "#" >JOIN</a>
+		<a th:if="${log.equals('login')}" class = "a1" href = "cart" >CART</a>
+		<a th:if="${log.equals('login')}" class = "a1" href = "#" >MY PAGE</a>
+		<a class = "a1" href = "#" >Q&A(1:1)</a>
+		</span>
+
+		<br><br>
+		<span style="float:right;">
+		<a class = "a2" href = "/view?kind=1" >Heels</a>
+		<a class = "a2" href = "/view?kind=2" >Boots</a>
+		<a class = "a2" href = "/view?kind=3" >Sandals</a>
+		<a class = "a2" href = "/view?kind=4" >Sneakers</a>
+		<a class = "a2" href = "/view?kind=5" >On Sale</a>
+		</span>
+	
+</div>
+<hr>
+</body>
+</html>

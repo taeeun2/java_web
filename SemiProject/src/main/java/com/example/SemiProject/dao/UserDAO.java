@@ -44,4 +44,8 @@ public interface UserDAO {
 	
 	@Select("select * from semi.user_place where viewYn='y'")
 	public List<User_place> main_place() throws Exception;
+	
+	
+	@Select("select total_distance from semi.user_place where place_id = #{place_id}")
+	public String getDistance(String place_id) throws Exception;
 }

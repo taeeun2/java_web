@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <!--타임리프 설정-->
+<head>
+<title>Insert title here</title>
+</head>
+<style>
+	
+
+	p{
+		text-align : center;
+		font-size : 25px;
+		color : black;
+		font-family: 'Song Myung', serif;	}
+	.banner{
+		width : 100%;
+	}
+	.pro_img{
+		width : 200px;
+		height : 200px;
+	}
+	tr { display: block; float: left; }
+	th, td { display: block; padding: 10px;font-family: 'Song Myung', serif;
+			text-align : center; }
+</style>
+<body>
+<th:block th:include="fragments/common/header"></th:block>
+<img src = "http://localhost:8000/image/mainbanner.jpg" class = "banner"/>
+
+<div class ="new_pro">
+<p>New Product</p>
+<table>
+	<tr th:each = "new_product : ${new_pro_list}">
+	<td>
+		<a th:href = "@{/view_detail_product(pseq=${new_product.pseq})}">
+	<img class = "pro_img" th:src="@{http://localhost:8000/product_images/}+${new_product.image}"></a>
+	<td th:text = "${new_product.name}"></td> 
+	<td th:text = "${new_product.price2}"></td>
+	</tr>
+</table>
+</div>
+<div class = "best_pro">
+<p>Best Product</p>
+<table>
+	<tr th:each = "best_product : ${best_pro_list}">
+	<td>
+	<a th:href = "@{/view_detail_product(pseq=${best_product.pseq})}">
+	<img class = "pro_img" th:src="@{http://localhost:8000/product_images/}+${best_product.image}"></a>
+	<td th:text = "${best_product.name}"></td> 
+	<td th:text = "${best_product.price2}"></td>
+	</tr>
+</table>
+</div>
+
+<th:block th:include="fragments/common/footer"></th:block>
+
+</body>
+</html>

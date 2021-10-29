@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <!--타임리프 설정-->
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8"><!--한글 설정-->
+<title>Insert title here</title>
+</head>
+<style>
+	
+
+	.loginForm{
+	  position:absolute;
+	  width:300px;
+	  height:400px;
+	  padding: 30px, 20px;
+	  background-color:#FFFFFF;
+	  text-align:center;
+	  top:50%;
+	  left:50%;
+	  transform: translate(-50%,-50%);
+	  border-radius: 15px;
+	
+	}
+	
+	.Form{
+	 border-bottom: 2px solid #adadad;
+ 	 margin: 30px;
+  	 padding: 10px 10px;
+	}
+	
+	#id,#pw {
+	  width: 100%;
+	  border:none;
+	  outline:none;
+	  color: #636e72;
+	  font-size:16px;
+	  height:25px;
+	  background: none;
+	}
+	
+	.submit {
+		  position:relative;
+		  left:40%;
+		  transform: translateX(-50%);
+		  margin-bottom: 40px;
+		  width:80%;
+		  height:40px;
+		  background : #000000;
+		  background-position: left;
+		  background-size: 200%;
+		  color:white;
+		  font-weight: bold;
+		  border:none;
+		  cursor:pointer;
+		  transition: 0.4s;
+		  display:inline;
+    }
+
+	
+	p{
+		font-size:13px;
+		color : red;
+	
+	}
+		
+</style>
+<body>
+<th:block th:include="fragments/common/header"></th:block>
+<nav>
+<th:block th:include="fragments/common/nav"></th:block>
+</nav>
+<body th:align = "center">
+<form th:action="login" method="post" class = "loginForm">
+<h1>Login</h1>
+<div><br><p th:text="${message}"></p></div>
+<div class = "Form"><input type = "text" name = "id" id = "id" placeholder="ID"/></div>
+<div class = "Form"><input type = "password" name = "pwd" id = "pw" placeholder="PW"/></div>
+<input type = "submit" value = "로그인" class = "submit"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv = "Content-Type" content="text/html;charset=UTF-8"><!--한글 설정-->
+    <title>마이크 테스트</title>
+</head>
+<script type="text/javascript">
+const fs = require("fs");
+const request = require('request');
+
+const clientId = 'qmbh4j8jdy';
+const clientSecret = 'DnfYxQU0obxfkaCfqu84uAiqNK8Ye1y9t4TIH0kE';
+
+// language => 언어 코드 ( Kor, Jpn, Eng, Chn )
+function stt(language, filePath) {
+    const url = "https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=${language}";
+    const requestConfig = {
+        url: url,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/octet-stream',
+            'X-NCP-APIGW-API-KEY-ID': clientId,
+            'X-NCP-APIGW-API-KEY': clientSecret
+        },
+        body: fs.createReadStream(filePath)
+    };
+
+    request(requestConfig, (err, response, body) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        console.log(response.statusCode);
+        console.log(body);
+    });
+}
+
+stt('Kor', './1635384481984.mp3');
+</script>
+<body>
+
+
+
+</body>
+</html>
+
+

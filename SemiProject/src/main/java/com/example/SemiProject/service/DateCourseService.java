@@ -1,6 +1,7 @@
 package com.example.SemiProject.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.SemiProject.domain.Date_course;
 
@@ -9,4 +10,5 @@ public interface DateCourseService {
 	public List<Date_course> getDateCourse(String id)throws Exception;
 	public Date_course getOneDateCourse(int num) throws Exception;
 	public void updateDateCourse(String comment, String img, int num)throws Exception;
+	public void insertMainDateCourse(String user_place_id,String place_name,String place_address,String img,String comment,int sequence)throws Exception;
 }

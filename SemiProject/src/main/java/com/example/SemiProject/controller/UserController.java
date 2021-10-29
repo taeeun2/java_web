@@ -87,6 +87,7 @@ public class UserController {
 		map.put("zip_num", user.getZip_num());
 		map.put("name", user.getName());
 		
+		
 		try {
 			userservice.editUser(map);
 			return "login";

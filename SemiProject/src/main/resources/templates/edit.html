@@ -62,6 +62,9 @@
 	
 	}
 	
+	.id{
+		background-color : gray;
+	}
 
 </style>
 <a class = "title" href = "/">랜데코</a><br><br><br><br>
@@ -78,7 +81,7 @@
 
 <form action = "edit" method = "POST" class = "editForm">
 <h2>회원정보 수정</h2><br>
-	아이디 : <input type="text" name = "id" th:value="${id}" disabled="disabled" readonly/><br>
+	아이디 : <input class = "id" type="text" name = "id" th:value="${id}"readonly/><br>
 	이메일 : <input type = "text" name ="email" th:value="${email}"/><br>
 	비밀번호 : <input type = "text" name ="pwd" th:value="${pwd}"/><br>
 	이름 : <input type = "text" name ="name" th:value="${name}"/><br>

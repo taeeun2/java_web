@@ -18,4 +18,6 @@ public interface UserService {
 	public void deleteUserPlace(String id)throws Exception;
 	public void viewPlace(String id)throws Exception;
 	public List<User_place> main_place()throws Exception;
+	public String getDistance(String place_id)throws Exception;
+	
 }

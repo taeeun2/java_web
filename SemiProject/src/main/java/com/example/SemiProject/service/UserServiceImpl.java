@@ -65,6 +65,9 @@ public class UserServiceImpl implements UserService{
 	public List<User_place> main_place()throws Exception{
 		return userDAO.main_place();
 	}
-	
+	@Override
+	public String getDistance(String place_id)throws Exception{
+		return userDAO.getDistance(place_id);
+	}
 	
 }

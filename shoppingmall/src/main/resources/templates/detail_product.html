@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+    <!--타임리프 설정-->
+<head>
+<meta http-equiv = "Content-Type" content="text/html;charset=UTF-8"><!--한글 설정-->
+<title>Insert title here</title>
+</head>
+
+
+<style>
+	.pro_detail_img{
+		width : 300px;
+		height : 300px;
+		float : left;
+		margin-right : 40px;
+		margin-top : 30px;
+	}
+	
+	h1{
+		margin-top : 60px;
+	}
+	
+	.btn{
+		background-color : white;
+	}
+	
+	input[type=button]:hover {
+		  background-color: gray;
+	}
+	
+	input[type=submit]:hover {
+		  background-color: gray;
+	}
+ 	input[type=reset]:hover {
+		  background-color: gray;
+	}
+
+</style>
+<body>
+<th:block th:include="fragments/common/header"></th:block>
+<nav>
+<th:block th:include="fragments/common/nav"></th:block>
+</nav>
+<img class = "pro_detail_img" th:src="@{http://localhost:8000/product_images/}+${product.image}">
+<h1>ITEM</h1>
+<form action = "cart_product" method = "post" th:object="${product}">
+<table>
+	<tr>
+		<td> Name :  </td>
+		<td th:text="${product.name}"></td>
+	</tr>
+	<tr>
+		<td> Price :  </td>
+		<td th:text = "${product.price2}"></td>
+	</tr>
+	<tr>
+		<td> Quantity :  </td>
+		<td> <input type = "text" value = 1 name = "quantity" id = "quantity"></td>
+	</tr>
+	<tr>
+		<td> Content : </td>
+		<td th:text = ${product.content}></td>
+	</tr>
+</table>
+<input type = "hidden" name = "pseq" th:value = "${product.pseq}">
+
+<br>
+	<div id= "btn_group">
+		<input class = "btn" type = "submit" value = "장바구니에 담기" />
+		<input class = "btn" type = "button" value = "즉시 구매"  id = "apibtn"/>
+		<input class = "btn" type = "reset" value = "취소"/>
+	</div>
+	<span th:text =${product_name}></span>
+	<span th:text = ${quantity}></span>
+	<span th:text = ${message2}></span>
+</form>
+</body>
+<br><br><br><br>
+<th:block th:include="fragments/common/footer"></th:block>
+
+</html>
