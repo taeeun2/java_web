@@ -46,4 +46,25 @@ public class MainController {
 	}
 	
 	
+	@GetMapping("/audioTest")
+	public void audioTest() {
+		
+	}
+	
+
+	@GetMapping("/test")
+	public void test() {
+		
+	}
+	
+	@GetMapping("/aiface")
+	public void aiface() {
+		
+	}
+	
+	@GetMapping("/aiface_test")
+	public void aiface_test() {
+		
+	}
+	
 }

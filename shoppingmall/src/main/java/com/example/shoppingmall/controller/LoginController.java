@@ -28,7 +28,7 @@ public class LoginController {
 		model.addAttribute("log","logout");
 	}
 	
-	/*
+	
 	@PostMapping("/login")
 	public String login(String id, String pwd, Model model, HttpServletRequest request) throws Exception{
 		
@@ -45,7 +45,7 @@ public class LoginController {
 		model.addAttribute("Member", member.getName());
 		return "redirect:/";
 		
-	}*/
+	}
 	
 	
 	@GetMapping("/logout")

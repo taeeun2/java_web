@@ -3,41 +3,34 @@
 
 <head>
     <meta http-equiv = "Content-Type" content="text/html;charset=UTF-8"><!--한글 설정-->
-    <title>마이크 테스트</title>
+    <title>tts 테스트</title>
 </head>
 <script type="text/javascript">
-const fs = require("fs");
-const request = require('request');
-
-const clientId = 'qmbh4j8jdy';
-const clientSecret = 'DnfYxQU0obxfkaCfqu84uAiqNK8Ye1y9t4TIH0kE';
-
-// language => 언어 코드 ( Kor, Jpn, Eng, Chn )
-function stt(language, filePath) {
-    const url = "https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=${language}";
-    const requestConfig = {
-        url: url,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/octet-stream',
-            'X-NCP-APIGW-API-KEY-ID': clientId,
-            'X-NCP-APIGW-API-KEY': clientSecret
-        },
-        body: fs.createReadStream(filePath)
-    };
-
-    request(requestConfig, (err, response, body) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-
-        console.log(response.statusCode);
-        console.log(body);
-    });
-}
-
-stt('Kor', './1635384481984.mp3');
+//네이버 음성합성 Open API 예제
+var express = require('express');
+var app = express();
+var client_id = 'qmbh4j8jdy';
+var client_secret = 'DnfYxQU0obxfkaCfqu84uAiqNK8Ye1y9t4TIH0kE';
+var fs = require('fs');
+app.get('/tts', function(req, res) {
+  var api_url = 'https://naveropenapi.apigw.ntruss.com/voice/v1/tts';
+  var request = require('request');
+  var options = {
+    url: api_url,
+    form: { speaker: 'mijin', speed: '0', text: '좋은 하루 되세요' },
+    headers: { 'X-NCP-APIGW-API-KEY-ID': client_id, 'X-NCP-APIGW-API-KEY': client_secret },
+  };
+  var writeStream = fs.createWriteStream('./tts1.mp3');
+  var _req = request.post(options).on('response', function(response) {
+    console.log(response.statusCode); // 200
+    console.log(response.headers['content-type']);
+  });
+  _req.pipe(writeStream); // file로 출력
+  _req.pipe(res); // 브라우저로 출력
+});
+app.listen(3000, function() {
+  console.log('http://127.0.0.1:3000/tts app listening on port 3000!');
+});
 </script>
 <body>
 

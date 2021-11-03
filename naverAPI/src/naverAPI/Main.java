@@ -6,14 +6,19 @@ import java.net.URL;
 public class Main {
 
     public static void main(String[] args) {
-        String clientId = "qmbh4j8jdy";             // Application Client ID";
-        String clientSecret = "DnfYxQU0obxfkaCfqu84uAiqNK8Ye1y9t4TIH0kE";     // Application Client Secret";
+    	
+    	
+    	
+    	
+    	
+        String clientId = "ae04cl80or";             // Application Client ID";
+        String clientSecret = "iOE185WnowDox1JFX9AVgY0iqNl815EDLV9FBr4X";     // Application Client Secret";
 
         try {
-            String imgFile = "./1635384481984.mp3";
+            String imgFile = "1635490396149.mp3";
             File voiceFile = new File(imgFile);
 
-            String language = "Kor";        // ¾ð¾î ÄÚµå ( Kor, Jpn, Eng, Chn )
+            String language = "Kor";        // ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ( Kor, Jpn, Eng, Chn )
             String apiURL = "https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=" + language;
             URL url = new URL(apiURL);
 
@@ -36,9 +41,9 @@ public class Main {
             inputStream.close();
             BufferedReader br = null;
             int responseCode = conn.getResponseCode();
-            if(responseCode == 200) { // Á¤»ó È£Ãâ
+            if(responseCode == 200) { // ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            } else {  // ¿À·ù ¹ß»ý
+            } else {  // ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
                 System.out.println("error!!!!!!! responseCode= " + responseCode);
                 br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             }

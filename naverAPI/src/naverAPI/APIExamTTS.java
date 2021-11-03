@@ -8,10 +8,10 @@ import java.util.Date;
 
 public class APIExamTTS {
 	public static void main(String[] args) {
-        String clientId = "qmbh4j8jdy";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ðÆ® ¾ÆÀÌµð°ª";
-        String clientSecret = "DnfYxQU0obxfkaCfqu84uAiqNK8Ye1y9t4TIH0kE";//¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ðÆ® ½ÃÅ©¸´°ª";
+        String clientId = "ae04cl80or";
+        String clientSecret = "iOE185WnowDox1JFX9AVgY0iqNl815EDLV9FBr4X";
         try {
-            String text = URLEncoder.encode("¸¸³ª¼­ ¹Ý°©½À´Ï´Ù.", "UTF-8"); // 13ÀÚ
+            String text = URLEncoder.encode("ì•ˆë…•í•˜ì„¸ìš”.", "UTF-8"); 
 //            String apiURL = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
             String apiURL = "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts";
             URL url = new URL(apiURL);
@@ -28,11 +28,11 @@ public class APIExamTTS {
             wr.close();
             int responseCode = con.getResponseCode();
             BufferedReader br;
-            if(responseCode==200) { // Á¤»ó È£Ãâ
+            if(responseCode==200) { 
                 InputStream is = con.getInputStream();
                 int read = 0;
                 byte[] bytes = new byte[1024];
-                // ·£´ýÇÑ ÀÌ¸§À¸·Î mp3 ÆÄÀÏ »ý¼º
+
                 String tempname = Long.valueOf(new Date().getTime()).toString();
                 File f = new File(tempname + ".mp3");
                 f.createNewFile();
@@ -41,7 +41,7 @@ public class APIExamTTS {
                     outputStream.write(bytes, 0, read);
                 }
                 is.close();
-            } else {  // ¿À·ù ¹ß»ý
+            } else { 
                 br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
